@@ -7,7 +7,7 @@
 Clone the repository:
 
 ```bash
-$ git clone https://git@github.com/nomad-back.git
+$ git clone https://github.com/patrice-boulanger/nomad-back.git
 ``` 
 
 Install required python packages in a new virtual environment:
