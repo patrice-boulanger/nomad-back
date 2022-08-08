@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*.mo
+*.log
+logs
+*.json
+.venv
+.idea/
+static/*
+media/*
+*~
+*.sqlite3

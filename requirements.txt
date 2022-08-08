@@ -1,0 +1,9 @@
+# 2022-08-08: initial version
+
+Django==3.2.13
+djangorestframework==3.13.1
+drf-yasg==1.21.3
+
+
+
+
