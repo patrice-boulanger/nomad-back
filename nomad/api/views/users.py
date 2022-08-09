@@ -2,6 +2,8 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 
+from knox.auth import TokenAuthentication
+
 from core.models import User
 
 from ..serializers import EntrepreneurSerializer, EntrepreneurCreateSerializer, CompanyUserSerializer
@@ -10,8 +12,10 @@ from ..serializers import EntrepreneurSerializer, EntrepreneurCreateSerializer, 
 class EntrepeneurListView(generics.ListAPIView):
     """ Returns the list of entrepreneurs that an authenticated user can view. """
 
-    serializer_class = EntrepreneurSerializer
+    authentication_classes = [TokenAuthentication,]
     permission_classes = [IsAuthenticated,]
+
+    serializer_class = EntrepreneurSerializer
 
     def get_queryset(self):
         """ Filter the data according to the type of user """
@@ -24,7 +28,7 @@ class EntrepeneurListView(generics.ListAPIView):
         elif user.is_company:
             pass # TODO
         elif user.is_entrepreneur:
-            queryset = User.objects.get(pk=user.pk)  # myself
+            queryset = User.objects.filter(pk=user.pk)  # myself
 
         return queryset
 
@@ -45,8 +49,10 @@ class EntrepreneurCreateView(generics.CreateAPIView):
 class CompanyUserListView(generics.ListAPIView):
     """ Returns the list of company users that an authenticated user can view. """
 
-    serializer_class = CompanyUserSerializer
+    authentication_classes = [TokenAuthentication,]
     permission_classes = [IsAuthenticated,]
+
+    serializer_class = CompanyUserSerializer
 
     def get_queryset(self):
         """ Filter the data according to the type of user """

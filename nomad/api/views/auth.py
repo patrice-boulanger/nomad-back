@@ -16,7 +16,6 @@ class NomadKnowUserSerializer(serializers.ModelSerializer):
 # Extends knox LoginView to add documentation
 class NomadKnoxLoginView(LoginView):
     authentication_classes = [BasicAuthentication, ]
-    permission_classes = [AllowAny, ]
 
     def post(self, request, format=None):
         """ Login view to retrieve a token for all subsequent calls requiring authentication.
@@ -40,3 +39,6 @@ class NomadKnoxLoginView(LoginView):
 
         """
         return super().post(request=request, format=format)
+
+
+
