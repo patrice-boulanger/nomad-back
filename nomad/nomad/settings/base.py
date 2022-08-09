@@ -15,13 +15,9 @@ from pathlib import Path
 from .i18n import *
 from .drf import *
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(os.path.dirname(PROJECT_DIR))
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # Application definition
 INSTALLED_APPS = [
