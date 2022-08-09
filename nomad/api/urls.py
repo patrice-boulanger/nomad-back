@@ -1,4 +1,4 @@
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 from django.conf import settings
 
 from drf_yasg import openapi
@@ -17,6 +17,7 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
+    path('auth/', include(('knox.urls', 'auth'), namespace="auth")),
     path('entrepreneurs/', EntrepeneurListView.as_view(), name="entrepreneurs-list"),
     path('entrepreneurs/register/', EntrepreneurCreateView.as_view(), name="entrepreneurs-create"),
     path('company/users/', CompanyUserListView.as_view(), name="company-users-list"),
