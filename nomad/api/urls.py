@@ -4,7 +4,10 @@ from django.conf import settings
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view, SwaggerUIRenderer
 
-from .views import (EntrepeneurListView, EntrepreneurCreateView,
+from knox import views as knox_views
+
+from .views import (NomadKnoxLoginView,
+                    EntrepeneurListView, EntrepreneurCreateView,
                     CompanyUserListView, )
 
 schema_view = get_schema_view(
@@ -17,7 +20,12 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('auth/', include(('knox.urls', 'auth'), namespace="auth")),
+    # authentication
+    path('auth/login/', NomadKnoxLoginView.as_view(), name="knox_login"),
+    path('auth/logout/', knox_views.LogoutView.as_view(), name='knox_logout'),
+    path('auth/logoutall/', knox_views.LogoutAllView.as_view(), name='knox_logoutall'),
+
+    # users management
     path('entrepreneurs/', EntrepeneurListView.as_view(), name="entrepreneurs-list"),
     path('entrepreneurs/register/', EntrepreneurCreateView.as_view(), name="entrepreneurs-create"),
     path('company/users/', CompanyUserListView.as_view(), name="company-users-list"),
