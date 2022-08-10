@@ -4,9 +4,11 @@ from core.models import User
 
 
 class EntrepreneurSerializer(serializers.ModelSerializer):
+    type = serializers.IntegerField(read_only=True)
+
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'last_name',)
+        fields = ('email', 'first_name', 'last_name', 'type',)
 
 
 class EntrepreneurCreateSerializer(serializers.ModelSerializer):
@@ -19,8 +21,3 @@ class EntrepreneurCreateSerializer(serializers.ModelSerializer):
         model = User
         fields = ('email', 'first_name', 'last_name', 'password',)
 
-
-class CompanyUserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('email', 'first_name', 'last_name', 'phone', 'company', )

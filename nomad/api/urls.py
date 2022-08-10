@@ -4,11 +4,9 @@ from django.conf import settings
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view, SwaggerUIRenderer
 
-from knox import views as knox_views
-
-from .views import (NomadKnoxLoginView,
-                    EntrepeneurListView, EntrepreneurCreateView,
-                    CompanyUserListView, )
+from .views import (MeView, MeFeaturesListView,
+                    EntrepreneurSignUpView,
+                    AllFeaturesListView, )
 
 schema_view = get_schema_view(
     info=openapi.Info(
@@ -20,15 +18,15 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    # authentication
-    path('auth/login/', NomadKnoxLoginView.as_view(), name="knox_login"),
-    path('auth/logout/', knox_views.LogoutView.as_view(), name='knox_logout'),
-    path('auth/logoutall/', knox_views.LogoutAllView.as_view(), name='knox_logoutall'),
-
     # users management
-    path('entrepreneurs/', EntrepeneurListView.as_view(), name="entrepreneurs-list"),
-    path('entrepreneurs/register/', EntrepreneurCreateView.as_view(), name="entrepreneurs-create"),
-    path('company/users/', CompanyUserListView.as_view(), name="company-users-list"),
+    path('entrepreneurs/register/', EntrepreneurSignUpView.as_view(), name="entrepreneurs-create"),
+
+    # user's information management views
+    path('me/', MeView.as_view(), name="me"),
+    path('me/features/', MeFeaturesListView.as_view(), name="me-features"),
+
+    # list of all features
+    path('features/all/', AllFeaturesListView.as_view(), name="features-all"),
 ]
 
 # Documentation swagger, available only if debug mode is enabled

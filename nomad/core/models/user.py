@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.base_user import BaseUserManager
 
 from .company import Company
+from .features import Feature
 
 
 class UserManager(BaseUserManager):
@@ -73,6 +74,9 @@ class User(AbstractUser):
     #: Company of the user if needed
     company = models.ForeignKey(Company, on_delete=models.PROTECT, blank=True, null=True,
                                 verbose_name=_('company'), related_name='users')
+
+    #: Features for entrepreneur users
+    features = models.ManyToManyField(Feature, related_name="features", verbose_name=_('features'))
 
     objects = UserManager()
 

@@ -24,7 +24,6 @@ INSTALLED_APPS = [
     'core',
     'api',
     'rest_framework',
-    'knox',
     'drf_yasg',
     'django.contrib.admin',
     'django.contrib.auth',

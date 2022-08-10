@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-08 19:37+0200\n"
+"POT-Creation-Date: 2022-08-10 17:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,55 +90,91 @@ msgstr "Entreprise"
 msgid "Companies"
 msgstr "Entreprises"
 
-#: core/models/user.py:17
+#: core/models/features.py:8
+msgid "name"
+msgstr "nom"
+
+#: core/models/features.py:9
+msgid "multiple choices"
+msgstr "choix multiple"
+
+#: core/models/features.py:10
+msgid "display order"
+msgstr "ordre d'affichage"
+
+#: core/models/features.py:17
+msgid "Features category"
+msgstr "Catégorie de compétences"
+
+#: core/models/features.py:18
+msgid "Features categories"
+msgstr "Catégories de compétences"
+
+#: core/models/features.py:24
+msgid "description"
+msgstr "description"
+
+#: core/models/features.py:31
+msgid "Feature"
+msgstr "Compétence"
+
+#: core/models/features.py:32
+msgid "Features"
+msgstr "Compétences"
+
+#: core/models/user.py:18
 msgid "Email value is mandatory to create a new user"
 msgstr "L'adresse mail est requise pour créer un nouveau compte"
 
-#: core/models/user.py:55
+#: core/models/user.py:56
 msgid "Administrator"
 msgstr "Administrateur"
 
-#: core/models/user.py:56
+#: core/models/user.py:57
 msgid "Company user"
 msgstr "Contact d'entreprise"
 
-#: core/models/user.py:57
+#: core/models/user.py:58
 msgid "Entrepreneur"
 msgstr "Indépendant"
 
-#: core/models/user.py:63
+#: core/models/user.py:64
 msgid "email address"
 msgstr "adresse email"
 
-#: core/models/user.py:65
+#: core/models/user.py:66
 msgid "first name"
 msgstr "prénom"
 
-#: core/models/user.py:67
+#: core/models/user.py:68
 msgid "last name"
 msgstr "nom de famille"
 
-#: core/models/user.py:69
+#: core/models/user.py:70
 msgid "phone number"
 msgstr "téléphone"
 
-#: core/models/user.py:70
+#: core/models/user.py:71
 msgid "required for company users"
 msgstr "obligatoire pour les contacts d'entreprise"
 
-#: core/models/user.py:72
+#: core/models/user.py:73
 msgid "type of user"
 msgstr "type d'utilisateur"
 
-#: core/models/user.py:75
+#: core/models/user.py:76
 msgid "company"
 msgstr "entreprise"
 
-#: core/models/user.py:99
+#: core/models/user.py:79
+msgid "features"
+msgstr "compétences"
+
+#: core/models/user.py:103
 msgid "a company user must be attached to an existing company"
 msgstr "un contact d'entreprise doit être rattaché à une entreprise"
 
-#: core/models/user.py:101
+#: core/models/user.py:105
 msgid "company users must have a valid phone number"
 msgstr "les contacts d'entreprise doivent avoir un numéro de téléphone valide"
 

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin, GroupAdmin
 from django.contrib.auth.models import Group
 
-from core.models import User, Company
+from core.models import User, Company, FeatureCategory, Feature
 
 
 class CompanyUserInline(admin.TabularInline):
@@ -21,15 +21,15 @@ class CompanyUserInline(admin.TabularInline):
 
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
-    list_display = ('name', 'type')
+    list_display = ('name', 'type', )
     ordering = ('name',)
 
     fieldsets = (
         (None, {
-            'fields': ('name',)
+            'fields': ('name', )
         }),
         ('Features', {
-            'fields':  ('type', 'siret', 'vat_excluded',)
+            'fields':  ('type', 'siret', 'vat_excluded', )
         }),
         ('Location', {
             'fields': ('address', 'zipcode', 'city', )
@@ -41,18 +41,22 @@ class CompanyAdmin(admin.ModelAdmin):
 @admin.register(User)
 class UserAdmin(UserAdmin, admin.ModelAdmin):
     list_display = ('email', 'first_name', 'last_name', 'type', 'is_superuser', 'is_staff', 'last_login',)
+    filter_horizontal = ('features', )
 
     fieldsets = (
         (None, {
             'fields': ('email',
                        ('first_name', 'last_name',),
                        'phone',
-                       'password',)
+                       'password',
+                       ('type', 'company'),),
+        }),
+        ('Features', {
+            'fields': ('features', )
         }),
         ('Permissions', {
             'fields': (
                 'is_active',
-                ('type', 'company'),
                 'is_staff', 'is_superuser',),
         }),
         ('Dates', {
@@ -69,7 +73,26 @@ class UserAdmin(UserAdmin, admin.ModelAdmin):
 
     ordering = ('email',)
 
-# we don't use Django groups
+
+class FeatureInline(admin.StackedInline):
+    model = Feature
+    extra = 3
+
+
+@admin.register(FeatureCategory)
+class FeatureCategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'rank', 'multiple_choices', )
+    fieldsets = (
+        (None, {
+            'fields': ('name', ('rank', 'multiple_choices',), )
+        })),
+
+    ordering = ('rank', 'name',)
+    inlines = [FeatureInline, ]
+
+
 admin.site.site_header = 'Nomad-Social Dashboard'
+
+# we don't use Django groups
 admin.site.unregister(Group)
 
