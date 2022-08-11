@@ -76,7 +76,7 @@ class User(AbstractUser):
                                 verbose_name=_('company'), related_name='users')
 
     #: Features for entrepreneur users
-    features = models.ManyToManyField(Feature, related_name="features", blank=True, null=True,
+    features = models.ManyToManyField(Feature, related_name="features", blank=True,
                                       verbose_name=_('features'))
 
     objects = UserManager()
