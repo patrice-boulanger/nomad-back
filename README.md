@@ -2,7 +2,7 @@
 
 **Python v3.8 is required to run this application**
 
-## TL;DR
+## Step by step 
 
 Clone the repository:
 
@@ -54,3 +54,9 @@ Start a browser to connect on the different endpoints:
   * `http://localhost:8000/admin/` to access the Django admin. Connect with the super-user previously created.
   * `http://localhost:8000/api/swagger/` or `http://localhost:8000/api/redoc/` to connect on the online API documentation.
 
+Import the features & their categories:
+
+```bash
+$ python manage.py loaddata ../features.json 
+Installed 58 object(s) from 1 fixture(s)
+```
