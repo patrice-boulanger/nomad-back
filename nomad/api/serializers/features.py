@@ -47,4 +47,9 @@ class AllFeaturesQueryStringSerializer(serializers.Serializer):
           <li><b>profile</b>: retrieve features & categories to be displayed on entrepreneur profile</li>
         </ul>
     """
-    context = serializers.CharField(required=True)
+    context = serializers.CharField(required=True, help_text="""Define the context to display the features. This field is mandatory and can take the values:
+<ul>
+  <li><b>mission</b>: retrieve features & categories to be displayed on mission description form</li>
+  <li><b>profile</b>: retrieve features & categories to be displayed on entrepreneur profile</li>
+</ul>
+""")

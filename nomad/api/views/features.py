@@ -23,7 +23,6 @@ class AllFeaturesListView(generics.ListAPIView):
 
         context = self.request.GET.get('context')
         scopes = [ FeatureBase.BOTH, ]
-        excluded = None
         if context == 'mission':
             scopes.append(FeatureBase.ONLY_MISSION)
         elif context == 'profile':
