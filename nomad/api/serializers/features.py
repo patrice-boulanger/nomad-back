@@ -35,3 +35,16 @@ class AllFeaturesSerializer(serializers.ModelSerializer):
     class Meta:
         model = FeatureCategory
         fields = ('name', 'multiple_choices', 'features', )
+
+
+class AllFeaturesQueryStringSerializer(serializers.Serializer):
+    """ Define the context to retrieve the features and categories.
+
+        This field can take the following values and is mandatory:
+
+        <ul>
+          <li><b>mission</b>: retrieve features & categories to be displayed on mission description form</li>
+          <li><b>profile</b>: retrieve features & categories to be displayed on entrepreneur profile</li>
+        </ul>
+    """
+    context = serializers.CharField(required=True)

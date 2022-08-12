@@ -1,2 +1,2 @@
 from .users import EntrepreneurSerializer, EntrepreneurCreateSerializer
-from .features import FeatureWriteSerializer, FeatureReadSerializer, AllFeaturesSerializer
+from .features import FeatureWriteSerializer, FeatureReadSerializer, AllFeaturesSerializer, AllFeaturesQueryStringSerializer
