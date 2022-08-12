@@ -22,7 +22,7 @@ class Availability(models.Model):
         super().clean()
         if not self.user.is_entrepreneur:
             raise ValidationError('availability time slots can only be affected to entrepreneur users')
-        if self.end > self.start:
+        if self.end < self.start:
             raise ValidationError('start date must be less than end date')
 
     def save(self, *args, **kwargs):
