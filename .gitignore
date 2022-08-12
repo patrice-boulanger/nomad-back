@@ -3,7 +3,6 @@ __pycache__/
 *.mo
 *.log
 logs
-*.json
 .venv
 .idea/
 static/*
