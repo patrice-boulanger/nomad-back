@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin, GroupAdmin
 from django.contrib.auth.models import Group
 
-from core.models import User, Company, FeatureCategory, Feature, Availability
+from core.models import User, Company, FeatureCategory, Feature, Availability, WorkLocation
 
 
 class CompanyUserInline(admin.TabularInline):
@@ -44,6 +44,12 @@ class AvailabilityInline(admin.StackedInline):
     extra = 2
 
 
+class WorkLocationInline(admin.StackedInline):
+    model = WorkLocation
+    fields = ('zipcode', 'city', 'department_name', 'region', ('longitude', 'latitude'), )
+    extra = 2
+    readonly_fields = ('city', 'department_name', 'region', 'longitude', 'latitude', )
+
 @admin.register(User)
 class UserAdmin(UserAdmin, admin.ModelAdmin):
     list_display = ('email', 'first_name', 'last_name', 'type', 'is_superuser', 'is_staff', 'last_login',)
@@ -78,7 +84,7 @@ class UserAdmin(UserAdmin, admin.ModelAdmin):
     )
 
     ordering = ('email',)
-    inlines = [AvailabilityInline, ]
+    inlines = [AvailabilityInline, WorkLocationInline, ]
 
 
 class FeatureInline(admin.TabularInline):

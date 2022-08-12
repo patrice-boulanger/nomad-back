@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-12 16:12+0200\n"
+"POT-Creation-Date: 2022-08-12 17:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,7 +74,7 @@ msgstr "Type d'entreprise"
 msgid "postal address"
 msgstr "adresse postale"
 
-#: core/models/company.py:33
+#: core/models/company.py:33 core/models/location.py:12
 msgid "zipcode"
 msgstr "code postal"
 
@@ -153,6 +153,14 @@ msgstr "Compétence"
 #: core/models/features.py:52
 msgid "Features"
 msgstr "Compétences"
+
+#: core/models/location.py:38
+msgid "Work location"
+msgstr "Lieu de travail"
+
+#: core/models/location.py:39
+msgid "Work locations"
+msgstr "Lieux de travail"
 
 #: core/models/user.py:18
 msgid "Email value is mandatory to create a new user"

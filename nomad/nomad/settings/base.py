@@ -14,6 +14,7 @@ from pathlib import Path
 
 from .i18n import *
 from .drf import *
+from .geo import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
