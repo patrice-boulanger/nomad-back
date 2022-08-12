@@ -4,7 +4,7 @@ from django.conf import settings
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view, SwaggerUIRenderer
 
-from .views import (MeView, MeFeaturesListView,
+from .views import (MeView, MeFeaturesListView, MeAvailabilityListView, MeAvailabilityDetailView,
                     EntrepreneurSignUpView,
                     AllFeaturesListView, )
 
@@ -24,6 +24,8 @@ urlpatterns = [
     # user's information management views
     path('me/', MeView.as_view(), name="me"),
     path('me/features/', MeFeaturesListView.as_view(), name="me-features"),
+    path('me/availabilities/', MeAvailabilityListView.as_view(), name="me-availability-list"),
+    path('me/availabilities/<int:pk>/', MeAvailabilityDetailView.as_view(), name="me-availability-detail"),
 
     # list of all features
     path('features/all/', AllFeaturesListView.as_view(), name="features-all"),

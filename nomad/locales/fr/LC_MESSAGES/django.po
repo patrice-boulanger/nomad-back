@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-12 15:07+0200\n"
+"POT-Creation-Date: 2022-08-12 16:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: core/models/availability.py:12
+msgid "start"
+msgstr "début"
+
+#: core/models/availability.py:14
+msgid "end"
+msgstr "fin"
+
+#: core/models/availability.py:34
+msgid "Availability timeslot"
+msgstr "Période de disponibilité"
+
+#: core/models/availability.py:35
+msgid "Availability timeslots"
+msgstr "Périodes de disponibilité"
 
 #: core/models/company.py:17
 msgid "private company"

@@ -7,9 +7,11 @@ from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 
 from core.models import User
+from core.models import Availability
 
 from ..serializers import (EntrepreneurSerializer, EntrepreneurCreateSerializer,
-                           FeatureReadSerializer, FeatureWriteSerializer,)
+                           FeatureReadSerializer, FeatureWriteSerializer,
+                           AvailabilitySerializer, )
 
 from ..permissions import IsNomadEntrepreneur
 
@@ -97,5 +99,18 @@ class MeFeaturesListView(generics.ListAPIView, generics.CreateAPIView):
         return super().post(request, *args, **kwargs)
 
 
+class MeAvailabilityBaseView(generics.GenericAPIView):
+    serializer_class = AvailabilitySerializer
+    permission_classes = [IsAuthenticated, IsNomadEntrepreneur, ]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Availability.objects.filter(user=user)
 
 
+class MeAvailabilityListView(MeAvailabilityBaseView, generics.ListAPIView, generics.CreateAPIView):
+    pass
+
+
+class MeAvailabilityDetailView(MeAvailabilityBaseView, generics.UpdateAPIView, generics.DestroyAPIView):
+    allowed_methods = ['PATCH', 'DELETE', ]  # Remove PUT

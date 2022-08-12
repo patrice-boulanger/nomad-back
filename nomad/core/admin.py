@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin, GroupAdmin
 from django.contrib.auth.models import Group
 
-from core.models import User, Company, FeatureCategory, Feature
+from core.models import User, Company, FeatureCategory, Feature, Availability
 
 
 class CompanyUserInline(admin.TabularInline):
@@ -38,6 +38,12 @@ class CompanyAdmin(admin.ModelAdmin):
 
     inlines = [CompanyUserInline, ]
 
+
+class AvailabilityInline(admin.StackedInline):
+    model = Availability
+    extra = 2
+
+
 @admin.register(User)
 class UserAdmin(UserAdmin, admin.ModelAdmin):
     list_display = ('email', 'first_name', 'last_name', 'type', 'is_superuser', 'is_staff', 'last_login',)
@@ -72,12 +78,18 @@ class UserAdmin(UserAdmin, admin.ModelAdmin):
     )
 
     ordering = ('email',)
+    inlines = [AvailabilityInline, ]
 
 
-class FeatureInline(admin.StackedInline):
+class FeatureInline(admin.TabularInline):
     model = Feature
     extra = 3
 
+    fieldsets = (
+        (None, {
+            'fields': ( ('from_dt', 'to_dt',), ),
+        }),
+    )
 
 @admin.register(FeatureCategory)
 class FeatureCategoryAdmin(admin.ModelAdmin):
