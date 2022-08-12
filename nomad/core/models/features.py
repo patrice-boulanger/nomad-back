@@ -2,7 +2,27 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-class FeatureCategory(models.Model):
+class FeatureBase(models.Model):
+    """ Common fields for both categories and features. """
+
+    ONLY_MISSION = 1
+    ONLY_PROFILE = 2
+    BOTH = 3
+
+    SCOPE = (
+        (ONLY_MISSION, _('Only on mission description')),
+        (ONLY_PROFILE, _('Only on entrepreneur profile')),
+        (BOTH, _('On both mission & profile'))
+    )
+
+    #: Define if a feature or a feature category is relevant on mission description or entrepreneur profile.
+    scope = models.PositiveSmallIntegerField(choices=SCOPE, default=BOTH, verbose_name=_('scope'))
+
+    class Meta:
+        abstract = True
+
+
+class FeatureCategory(FeatureBase):
     """ Feature categories allow to group features """
 
     name = models.CharField(max_length=200, unique=True, verbose_name=_('name'))
@@ -18,7 +38,7 @@ class FeatureCategory(models.Model):
         verbose_name_plural = _('Features categories')
 
 
-class Feature(models.Model):
+class Feature(FeatureBase):
     """ Specific features to describe mission requirements & entrepreneur's skills. """
 
     description = models.CharField(max_length=300, unique=True, verbose_name=_('description'))

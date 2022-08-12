@@ -81,10 +81,10 @@ class FeatureInline(admin.StackedInline):
 
 @admin.register(FeatureCategory)
 class FeatureCategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'rank', 'multiple_choices', )
+    list_display = ('name', 'scope', 'multiple_choices', 'rank',  )
     fieldsets = (
         (None, {
-            'fields': ('name', ('rank', 'multiple_choices',), )
+            'fields': ('name', ('scope', 'rank', 'multiple_choices', ), )
         })),
 
     ordering = ('rank', 'name',)

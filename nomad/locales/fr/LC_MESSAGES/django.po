@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-10 17:58+0200\n"
+"POT-Creation-Date: 2022-08-12 15:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,35 +90,51 @@ msgstr "Entreprise"
 msgid "Companies"
 msgstr "Entreprises"
 
-#: core/models/features.py:8
+#: core/models/features.py:13
+msgid "Only on mission description"
+msgstr "Seulement sur le descriptif de mission"
+
+#: core/models/features.py:14
+msgid "Only on entrepreneur profile"
+msgstr "Seulement sur le profil indépendant"
+
+#: core/models/features.py:15
+msgid "On both mission & profile"
+msgstr "Sur la mission et le profil"
+
+#: core/models/features.py:19
+msgid "scope"
+msgstr "visibilité"
+
+#: core/models/features.py:28
 msgid "name"
 msgstr "nom"
 
-#: core/models/features.py:9
+#: core/models/features.py:29
 msgid "multiple choices"
 msgstr "choix multiple"
 
-#: core/models/features.py:10
+#: core/models/features.py:30
 msgid "display order"
 msgstr "ordre d'affichage"
 
-#: core/models/features.py:17
+#: core/models/features.py:37
 msgid "Features category"
 msgstr "Catégorie de compétences"
 
-#: core/models/features.py:18
+#: core/models/features.py:38
 msgid "Features categories"
 msgstr "Catégories de compétences"
 
-#: core/models/features.py:24
+#: core/models/features.py:44
 msgid "description"
 msgstr "description"
 
-#: core/models/features.py:31
+#: core/models/features.py:51
 msgid "Feature"
 msgstr "Compétence"
 
-#: core/models/features.py:32
+#: core/models/features.py:52
 msgid "Features"
 msgstr "Compétences"
 
@@ -166,15 +182,15 @@ msgstr "type d'utilisateur"
 msgid "company"
 msgstr "entreprise"
 
-#: core/models/user.py:79
+#: core/models/user.py:80
 msgid "features"
 msgstr "compétences"
 
-#: core/models/user.py:103
+#: core/models/user.py:104
 msgid "a company user must be attached to an existing company"
 msgstr "un contact d'entreprise doit être rattaché à une entreprise"
 
-#: core/models/user.py:105
+#: core/models/user.py:106
 msgid "company users must have a valid phone number"
 msgstr "les contacts d'entreprise doivent avoir un numéro de téléphone valide"
 
