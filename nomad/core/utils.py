@@ -17,13 +17,13 @@ def zipcode_extract(zipcode):
     longitude = None
 
     if len(settings.ZIPCODE_JSON):
-        for item in settings.ZIPCODE_JSON:
-            if item['fields']['code_postal'] == zipcode:
-                city = item['fields']['nom_de_la_commune']
-                coords = item['fields']['coordonnees_gps']
-                latitude = coords[0]
-                longitude = coords[1]
-                break
+        try:
+            item = settings.ZIPCODE_JSON[zipcode]
+            city = item[0]['city']
+            latitude = item[0]['latitude']
+            longitude = item[0]['longitude']
+        except KeyError:
+            pass
     else:
         print("WARNING, zipcode database is empty")
 
@@ -32,16 +32,18 @@ def zipcode_extract(zipcode):
 
     # If the first two digits are > 95, then the department is the first 3 digits (DOM-TOM), else only the
     # first two digits are relevant.
-    dpt = int(zipcode[:2])
-    if dpt > 95:
-        dpt = int(zipcode[:3])
+    dpt = zipcode[:2]
+    if int(dpt) > 95:
+        dpt = zipcode[:3]
 
     if len(settings.DPT_AND_REGIONS_JSON):
-        for item in settings.DPT_AND_REGIONS_JSON:
-            if item['num_dep'] == dpt:
-                dpt_name = item['dep_name']
-                region = item['region_name']
-                break
+        try:
+            item = settings.DPT_AND_REGIONS_JSON[dpt]
+            print(item)
+            dpt_name = item['name']
+            region = item['region']
+        except KeyError:
+            pass
     else:
         print("WARNING, department and regions database is empty")
 

@@ -49,8 +49,8 @@ class WorkLocation(models.Model):
             self.region = region
             self.latitude = lat
             self.longitude = long
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"{self.zipcode}: {str(e)}")
 
         super().save(*args, **kwargs)
 
