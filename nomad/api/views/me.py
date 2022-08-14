@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -6,12 +6,12 @@ from rest_framework.permissions import IsAuthenticated
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 
-from core.models import User
-from core.models import Availability
+from core.models import User, Availability, WorkLocation
 
 from ..serializers import (EntrepreneurSerializer, EntrepreneurCreateSerializer,
                            FeatureReadSerializer, FeatureWriteSerializer,
-                           AvailabilitySerializer, )
+                           AvailabilitySerializer,
+                           WorkLocationReadSerializer, WorkLocationWriteSerializer,)
 
 from ..permissions import IsNomadEntrepreneur
 
@@ -113,4 +113,37 @@ class MeAvailabilityListView(MeAvailabilityBaseView, generics.ListAPIView, gener
 
 
 class MeAvailabilityDetailView(MeAvailabilityBaseView, generics.UpdateAPIView, generics.DestroyAPIView):
-    allowed_methods = ['PATCH', 'DELETE', ]  # Remove PUT
+    allowed_methods = ['PATCH', 'DELETE', ]  # remove PUT
+
+
+class MeWorkLocationBaseView(generics.GenericAPIView):
+    permission_classes = [IsAuthenticated, IsNomadEntrepreneur, ]
+
+    def get_queryset(self):
+        user = self.request.user
+        return WorkLocation.objects.filter(user=user)
+
+
+class MeWorkLocationListView(MeWorkLocationBaseView, generics.ListAPIView, generics.CreateAPIView):
+
+    def get_serializer_class(self):
+        return WorkLocationReadSerializer if self.request.method == 'GET' else WorkLocationWriteSerializer
+
+    def create(self, request, *args, **kwargs):
+        """ Returns the auto-completed fields """
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        obj = serializer.save()
+        headers = self.get_success_headers(serializer.data)
+        return Response(WorkLocationReadSerializer(instance=obj).data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+class MeWorkLocationDetailView(MeWorkLocationBaseView, generics.UpdateAPIView, generics.DestroyAPIView):
+    allowed_methods = ['PATCH', 'DELETE', ]  # remove PUT
+    serializer_class = WorkLocationWriteSerializer
+
+    def update(self, request, *args, **kwargs):
+        """ Returns the auto-completed fields """
+        super().update(request, *args, **kwargs)
+        return Response(WorkLocationReadSerializer(self.get_object()).data)
+

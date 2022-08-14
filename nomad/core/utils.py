@@ -39,7 +39,6 @@ def zipcode_extract(zipcode):
     if len(settings.DPT_AND_REGIONS_JSON):
         try:
             item = settings.DPT_AND_REGIONS_JSON[dpt]
-            print(item)
             dpt_name = item['name']
             region = item['region']
         except KeyError:

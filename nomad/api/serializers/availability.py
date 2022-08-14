@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.exceptions import ValidationError
 
 from core.models import Availability
 
@@ -11,8 +12,10 @@ class AvailabilitySerializer(serializers.ModelSerializer):
         request = self.context.get("request")
         if request and hasattr(request, "user"):
             user = request.user
+        else:
+            raise ValidationError("field user is required for availability")
 
-        super().save(user=user)
+        return super().save(user=user)
 
     class Meta:
         model = Availability
