@@ -97,10 +97,8 @@ class User(AbstractUser):
 
     @property
     def is_complete(self):
-        """ Returns True if an entrepreneur is complete, i.e. this user has features, availabilities and work locations
-            set in the database.
-
-            If the user is not an entrepreneur profile, raises ValueError.
+        """ Returns True if an entrepreneur profile is complete, i.e. this user has features, availabilities and
+            work locations set in the database. If the user is not an entrepreneur profile, raises ValueError.
         """
         if not self.is_entrepreneur:
             raise ValueError("is_complete not available on this user")
