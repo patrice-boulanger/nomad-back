@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.html import mark_safe
 from django.contrib.auth.admin import UserAdmin, GroupAdmin
 from django.contrib.auth.models import Group
 
@@ -59,7 +60,6 @@ class UserAdmin(UserAdmin, admin.ModelAdmin):
     readonly_fields = ('is_complete',)
 
     def is_complete(self, obj):
-        from django.utils.html import mark_safe
         text = ""
         try:
             if obj.is_complete:
