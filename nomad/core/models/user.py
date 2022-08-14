@@ -60,6 +60,11 @@ class User(AbstractUser):
 
     #: We don't use the username, remove this field from the base model.
     username = None
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['first_name', 'last_name', ]
+    objects = UserManager()
+
     #: Set the email field as user identifier and set it unique.
     email = models.EmailField(_('email address'), unique=True)
     #: First name of the user, set as mandatory.
@@ -74,15 +79,9 @@ class User(AbstractUser):
     #: Company of the user if needed
     company = models.ForeignKey(Company, on_delete=models.PROTECT, blank=True, null=True,
                                 verbose_name=_('company'), related_name='users')
-
     #: Features for entrepreneur users
     features = models.ManyToManyField(Feature, related_name="features", blank=True,
                                       verbose_name=_('features'))
-
-    objects = UserManager()
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name', ]
 
     @property
     def is_admin(self):
@@ -96,9 +95,19 @@ class User(AbstractUser):
     def is_entrepreneur(self):
         return self.type == User.ENTREPRENEUR
 
+    @property
+    def is_complete(self):
+        """ Returns True if an entrepreneur is complete, i.e. this user has features, availabilities and work locations
+            set in the database.
+
+            If the user is not an entrepreneur profile, raises ValueError.
+        """
+        if not self.is_entrepreneur:
+            raise ValueError("is_complete not available on this user")
+        return self.features.count() > 0 and self.availabilities.count() > 0 and self.locations.count() > 0
+
     def clean(self):
         super().clean()
-
         if self.is_company:
             if not self.company:
                 raise ValidationError(_('a company user must be attached to an existing company'))
@@ -107,10 +116,8 @@ class User(AbstractUser):
 
     def save(self, *args, **kwargs):
         self.full_clean()
-
         # clean fields
         self.first_name = self.first_name.strip().title()
         self.last_name = self.last_name.strip().title()
         self.email = self.email.strip().lower()
-
         super(User, self).save(*args, **kwargs)

@@ -19,6 +19,7 @@ class CompanyUserInline(admin.TabularInline):
     def has_change_permission(self, request, obj=None):
         return False
 
+
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
     list_display = ('name', 'type', )
@@ -46,33 +47,55 @@ class AvailabilityInline(admin.StackedInline):
 
 class WorkLocationInline(admin.StackedInline):
     model = WorkLocation
-    fields = ('zipcode', 'city', 'department_name', 'region', ('longitude', 'latitude'), )
     extra = 2
+    fields = ('zipcode', 'city', 'department_name', 'region', ('longitude', 'latitude'), )
     readonly_fields = ('city', 'department_name', 'region', 'longitude', 'latitude', )
+
 
 @admin.register(User)
 class UserAdmin(UserAdmin, admin.ModelAdmin):
-    list_display = ('email', 'first_name', 'last_name', 'type', 'is_superuser', 'is_staff', 'last_login',)
+    list_display = ('email', 'first_name', 'last_name', 'type', 'is_complete', 'is_superuser', 'is_staff', 'last_login',)
     filter_horizontal = ('features', )
+    readonly_fields = ('is_complete',)
+
+    def is_complete(self, obj):
+        from django.utils.html import mark_safe
+        text = ""
+        try:
+            if obj.is_complete:
+                bg = "green"
+                status = "Complete"
+            else:
+                bg = "red"
+                status = "Not complete"
+
+            text = f'<span style=\"background-color: {bg}; color: white; padding: 5px; border-radius: 5px;\">{status}</span>'
+        except ValueError:
+            text = "<i>n/a</i>"
+
+        return mark_safe(text)
 
     fieldsets = (
         (None, {
-            'fields': ('email',
+            'fields': (('email', 'is_complete'),
                        ('first_name', 'last_name',),
                        'phone',
                        'password',
                        ('type', 'company'),),
         }),
-        ('Features', {
-            'fields': ('features', )
-        }),
         ('Permissions', {
+            'classes': ('collapse', ),
             'fields': (
                 'is_active',
                 'is_staff', 'is_superuser',),
         }),
         ('Dates', {
+            'classes': ('collapse', ),
             'fields': ('last_login', 'date_joined')
+        }),
+        ('Features', {
+            'classes': ('wide',),
+            'fields': ('features', )
         }),
     )
 
@@ -96,6 +119,7 @@ class FeatureInline(admin.TabularInline):
             'fields': ( ('from_dt', 'to_dt',), ),
         }),
     )
+
 
 @admin.register(FeatureCategory)
 class FeatureCategoryAdmin(admin.ModelAdmin):
