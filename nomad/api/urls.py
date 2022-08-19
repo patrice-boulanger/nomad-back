@@ -9,7 +9,8 @@ from .views import (MeView,
                     MeAvailabilityListView, MeAvailabilityDetailView,
                     MeWorkLocationListView, MeWorkLocationDetailView,
                     EntrepreneurSignUpView,
-                    AllFeaturesListView, )
+                    AllFeaturesListView,
+                    MissionListView, MissionDetailView, )
 
 schema_view = get_schema_view(
     info=openapi.Info(
@@ -31,6 +32,10 @@ urlpatterns = [
     path('me/availabilities/<int:pk>/', MeAvailabilityDetailView.as_view(), name="me-availability-detail"),
     path('me/worklocations/', MeWorkLocationListView.as_view(), name="me-worklocation-list"),
     path('me/worklocations/<int:pk>/', MeWorkLocationDetailView.as_view(), name="me-worklocation-detail"),
+
+    # missions search engine
+    path('missions/', MissionListView.as_view(), name="missions-list"),
+    path('missions/<int:pk>/', MissionDetailView.as_view(), name="mission-detail"),
 
     # list of all features
     path('features/all/', AllFeaturesListView.as_view(), name="features-all"),

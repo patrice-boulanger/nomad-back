@@ -1,9 +1,29 @@
 from django.contrib import admin
+from django.utils import timezone
 from django.utils.html import mark_safe
 from django.contrib.auth.admin import UserAdmin, GroupAdmin
 from django.contrib.auth.models import Group
 
-from core.models import User, Company, FeatureCategory, Feature, Availability, WorkLocation
+from core.models import User, Company, FeatureCategory, Feature, Availability, WorkLocation, Mission
+
+
+@admin.register(Mission)
+class MissionAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'company', 'start', 'end', 'city', 'title', 'state',)
+    fieldsets = (
+        (None, {
+            'fields': (
+                'title', 'description',
+                'company',
+                ('start', 'end',),
+                ('zipcode', 'city',),
+                'features',
+            )
+        }),
+    )
+
+    filter_horizontal = ('features', )
+    readonly_fields = ('state', 'city',)
 
 
 class CompanyUserInline(admin.TabularInline):

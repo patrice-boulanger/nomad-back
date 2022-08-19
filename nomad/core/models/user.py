@@ -79,9 +79,9 @@ class User(AbstractUser):
     #: Company of the user if needed
     company = models.ForeignKey(Company, on_delete=models.PROTECT, blank=True, null=True,
                                 verbose_name=_('company'), related_name='users')
+
     #: Features for entrepreneur users
-    features = models.ManyToManyField(Feature, related_name="features", blank=True,
-                                      verbose_name=_('features'))
+    features = models.ManyToManyField(Feature, related_name='users', blank=True, verbose_name=_('features'))
 
     @property
     def is_admin(self):

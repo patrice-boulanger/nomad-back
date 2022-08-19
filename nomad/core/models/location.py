@@ -1,5 +1,5 @@
 import string
-import json
+import logging
 
 from django.db import models
 from django.conf import settings
@@ -10,6 +10,8 @@ from core.utils import zipcode_extract
 
 from .user import User
 
+
+logger = logging.getLogger("application")
 
 class WorkLocation(models.Model):
     zipcode = models.CharField(max_length=5, verbose_name=_('zipcode'))
@@ -34,9 +36,9 @@ class WorkLocation(models.Model):
     def clean(self):
         super().clean()
         if not self.user.is_entrepreneur:
-            raise ValidationError('locations can only be affected to entrepreneur users')
+            raise ValidationError(_("locations can only be affected to entrepreneur users"))
         if any([c not in string.digits for c in self.zipcode]):
-            raise ValidationError("the zipcode must be all numeric")
+            raise ValidationError(_("the zipcode must be all numeric"))
 
     def save(self, *args, **kwargs):
         self.full_clean()
@@ -50,7 +52,7 @@ class WorkLocation(models.Model):
             self.latitude = lat
             self.longitude = long
         except Exception as e:
-            print(f"{self.zipcode}: {str(e)}")
+            logger.warning(f"cannot expand zipcode {self.zipcode} for work location: {str(e)}")
 
         super().save(*args, **kwargs)
 
