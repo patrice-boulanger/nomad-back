@@ -1,8 +1,11 @@
 from django.contrib import admin
+from django.db import models
 from django.utils import timezone
 from django.utils.html import mark_safe
 from django.contrib.auth.admin import UserAdmin, GroupAdmin
 from django.contrib.auth.models import Group
+
+from tinymce.widgets import TinyMCE
 
 from core.models import User, Company, FeatureCategory, Feature, Availability, WorkLocation, Mission
 
@@ -21,6 +24,10 @@ class MissionAdmin(admin.ModelAdmin):
             )
         }),
     )
+
+    formfield_overrides = {
+        models.TextField: {'widget': TinyMCE()}
+    }
 
     filter_horizontal = ('features', )
     readonly_fields = ('state', 'city',)

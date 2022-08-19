@@ -15,6 +15,8 @@ from pathlib import Path
 from .i18n import *
 from .drf import *
 from .geo import *
+from .tinymce import *
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,6 +28,7 @@ INSTALLED_APPS = [
     'api',
     'rest_framework',
     'drf_yasg',
+    'tinymce',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
