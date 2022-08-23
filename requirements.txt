@@ -1,9 +1,11 @@
+# 2022-08-23: add corsheaders
+# 2022-08-19: add TinyMCE for mission description
 # 2022-08-08: initial version
 
 Django==3.2.13
 djangorestframework==3.13.1
 drf-yasg==1.21.3
 django-tinymce4-lite
-
+django-cors-headers==3.13.0
 
 

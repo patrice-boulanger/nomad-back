@@ -4,12 +4,16 @@ from core.models import Mission
 
 
 class MissionListSerializer(serializers.ModelSerializer):
+    company = serializers.CharField()
+
     class Meta:
         model = Mission
-        fields = ('title', 'start', 'end', 'zipcode', 'city',)
+        fields = ('id', 'title', 'start', 'end', 'zipcode', 'city', 'company',)
 
 
 class MissionDetailSerializer(serializers.ModelSerializer):
+    company = serializers.CharField()
+
     class Meta:
         model = Mission
         fields = "__all__"
