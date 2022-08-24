@@ -15,7 +15,8 @@ class UserManager(BaseUserManager):
 
     def _create_user(self, email, password, **extra_fields):
         if not email:
-            raise ValueError(_('Email value is mandatory to create a new user'))
+            raise ValueError(
+                _('Email value is mandatory to create a new user'))
 
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
@@ -75,13 +76,18 @@ class User(AbstractUser):
     phone = models.CharField(max_length=20, blank=True, null=True, verbose_name=_('phone number'),
                              help_text=_('required for company users'))
     #: Type of the user
-    type = models.PositiveSmallIntegerField(choices=TYPES, default=ENTREPRENEUR, verbose_name=_('type of user'))
+    type = models.PositiveSmallIntegerField(
+        choices=TYPES, default=ENTREPRENEUR, verbose_name=_('type of user'))
+    #: Driving license of the user
+    driving_license = models.BooleanField(
+        default=False, verbose_name=_('driving license'))
     #: Company of the user if needed
     company = models.ForeignKey(Company, on_delete=models.PROTECT, blank=True, null=True,
                                 verbose_name=_('company'), related_name='users')
 
     #: Features for entrepreneur users
-    features = models.ManyToManyField(Feature, related_name='users', blank=True, verbose_name=_('features'))
+    features = models.ManyToManyField(
+        Feature, related_name='users', blank=True, verbose_name=_('features'))
 
     @property
     def is_admin(self):
@@ -108,9 +114,11 @@ class User(AbstractUser):
         super().clean()
         if self.is_company:
             if not self.company:
-                raise ValidationError(_('a company user must be attached to an existing company'))
+                raise ValidationError(
+                    _('a company user must be attached to an existing company'))
             if not self.phone:
-                raise ValidationError(_('company users must have a valid phone number'))
+                raise ValidationError(
+                    _('company users must have a valid phone number'))
 
     def save(self, *args, **kwargs):
         self.full_clean()

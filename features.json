@@ -31,16 +31,6 @@
   },
   {
     "model": "core.featurecategory",
-    "pk": 5,
-    "fields": {
-      "scope": 3,
-      "name": "Permis B ?",
-      "multiple_choices": false,
-      "rank": 40
-    }
-  },
-  {
-    "model": "core.featurecategory",
     "pk": 6,
     "fields": {
       "scope": 3,
@@ -395,24 +385,6 @@
   },
   {
     "model": "core.feature",
-    "pk": 37,
-    "fields": {
-      "scope": 1,
-      "description": "Obligatoire",
-      "category": 5
-    }
-  },
-  {
-    "model": "core.feature",
-    "pk": 38,
-    "fields": {
-      "scope": 1,
-      "description": "Non obligatoire",
-      "category": 5
-    }
-  },
-  {
-    "model": "core.feature",
     "pk": 41,
     "fields": {
       "scope": 3,
@@ -490,42 +462,6 @@
       "scope": 3,
       "description": "Russe",
       "category": 7
-    }
-  },
-  {
-    "model": "core.feature",
-    "pk": 50,
-    "fields": {
-      "scope": 1,
-      "description": "SOS Renfort (besoin d’aide dans les 48h maximum)",
-      "category": 8
-    }
-  },
-  {
-    "model": "core.feature",
-    "pk": 51,
-    "fields": {
-      "scope": 1,
-      "description": "Délai standard",
-      "category": 8
-    }
-  },
-  {
-    "model": "core.feature",
-    "pk": 52,
-    "fields": {
-      "scope": 2,
-      "description": "Oui",
-      "category": 5
-    }
-  },
-  {
-    "model": "core.feature",
-    "pk": 53,
-    "fields": {
-      "scope": 2,
-      "description": "Non",
-      "category": 5
     }
   }
 ]
