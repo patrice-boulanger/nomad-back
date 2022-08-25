@@ -1,0 +1,13 @@
+.matching {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.container {
+    background-color: antiquewhite;
+    border: 1px solid;
+    margin-block-end: 10px;
+    padding-inline-start: 5px;
+    width: auto;
+}

@@ -16,9 +16,10 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-
+import matching
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('matching/', matching.match_all_missions, name="matching"),
     path('api/', include(('api.urls', 'api'), namespace='api')),
-    path('tinymce/',include('tinymce.urls')),
+    path('tinymce/', include('tinymce.urls')),
 ]

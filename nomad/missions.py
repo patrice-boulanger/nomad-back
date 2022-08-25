@@ -15,6 +15,8 @@ django.setup()
 from core.models import Company, Mission
 
 
+Bool = [True, False]
+
 T = ["Cadre Social H/F", "Intervant Social H/F", "Ntervenant Social H/F",
      "Travaileur Social H/F", "Gestionnaire Social H/F", "Formateur en Social H/F"]
 D = ["Vous mettez en oeuvre le plan d'actions de prévention sanitaire et sociale de l'établissement.", "Vous mettez en oeuvre le plan d'actions de prévention sanitaire et sociale de l'établissement.",
@@ -30,6 +32,8 @@ for i in range(200):
     company = random.choice(Company.objects.all())
     description = random.choice(D)
     titre = random.choice(T)
+    driving_license_required = random.choice(Bool)
+    is_matchable = random.choice(Bool)
 
     Mission.objects.create(title=titre, description=description,
-                           start=start, end=end, zipcode=zipcode, company=company)
+                           start=start, end=end, zipcode=zipcode, company=company,is_matchable=is_matchable, driving_license_required=driving_license_required)

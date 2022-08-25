@@ -1,0 +1,27 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'mission/matching.css' %}">
+<h1>Matching missions</h1>
+   
+
+
+
+<div class="matching">
+    {% for key, values in resultat.items %}
+    {% with pk="1" %}  
+
+    <div class="container">
+        <div class="ligne">
+            <p><strong>Titre de la mission : </strong><a href="/../admin/core/mission/">{{ key }}</a></p>
+            <p><strong>Independant qui ont matchés : </strong><p>
+                {% for value in values %}{% for indep, pourcentage in value.items%}  <p>{{ indep }} &nbsp; => &nbsp; matché à  <strong>{{pourcentage}}</strong>  </p>{% endfor %}{% endfor %}
+        </div>
+    </div>
+    {% endwith %}
+    {% endfor %}
+</div>
+
+
+
+
+
+

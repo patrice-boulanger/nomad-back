@@ -1,10 +1,11 @@
 from django.contrib import admin
+from django.conf.urls import url
 from django.db import models
 from django.utils import timezone
 from django.utils.html import mark_safe
 from django.contrib.auth.admin import UserAdmin, GroupAdmin
 from django.contrib.auth.models import Group
-
+import matching
 from tinymce.widgets import TinyMCE
 
 from core.models import User, Company, FeatureCategory, Feature, Availability, WorkLocation, Mission
@@ -32,6 +33,7 @@ class MissionAdmin(admin.ModelAdmin):
 
     filter_horizontal = ('features', )
     readonly_fields = ('state', 'city',)
+    change_list_template = 'admin/mission/mission_change_list.html'
 
 
 class CompanyUserInline(admin.TabularInline):
@@ -165,6 +167,5 @@ class FeatureCategoryAdmin(admin.ModelAdmin):
 
 
 admin.site.site_header = 'Nomad-Social Dashboard'
-
 # we don't use Django groups
 admin.site.unregister(Group)
