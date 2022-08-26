@@ -1,0 +1,18 @@
+<html>
+<head><title>Mission matching result</title></head>
+<body>
+<h2>Mission matching results:</h2>
+{% for mission, data in matches.items %}
+<p>Mission <a href="{{ base_url }}{% url 'admin:core_mission_change' mission %}">{{ mission }}</a>:</p>
+    <ul>
+    {% for user, percent in data %}
+        <li><a href="{{ base_url }}{% url 'admin:core_user_change' user.pk %}">{{ user.email }}</a> matches
+            {% if percent == 100.0 %}<span style="color: green; font-weight: bold;">{% endif %}
+            {{ percent }}%
+            {% if percent == 100.0 %}</span>{% endif %}
+            of mission features</li>
+    {% endfor %}
+    </ul>
+{% endfor %}
+</body>
+</html>
