@@ -1,549 +1,421 @@
 [
-{
-  "model": "core.featurecategory",
-  "pk": 2,
-  "fields": {
-    "scope": 3,
-    "name": "Diplômes",
-    "multiple_choices": true,
-    "rank": 20
+  {
+    "model": "core.featurecategory",
+    "pk": 2,
+    "fields": {
+      "scope": 3,
+      "name": "Diplômes",
+      "multiple_choices": true,
+      "rank": 20
+    }
+  },
+  {
+    "model": "core.featurecategory",
+    "pk": 4,
+    "fields": {
+      "scope": 3,
+      "name": "Expérience(s) spécifique(s)",
+      "multiple_choices": true,
+      "rank": 50
+    }
+  },
+  {
+    "model": "core.featurecategory",
+    "pk": 6,
+    "fields": {
+      "scope": 3,
+      "name": "Outils numériques",
+      "multiple_choices": true,
+      "rank": 70
+    }
+  },
+  {
+    "model": "core.featurecategory",
+    "pk": 7,
+    "fields": {
+      "scope": 3,
+      "name": "Langues",
+      "multiple_choices": true,
+      "rank": 60
+    }
+  },
+  {
+    "model": "core.featurecategory",
+    "pk": 8,
+    "fields": {
+      "scope": 1,
+      "name": "Type de mission",
+      "multiple_choices": false,
+      "rank": 10
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 1,
+    "fields": {
+      "scope": 3,
+      "description": "Certificat d'aptitude aux fonctions de directeur d'établissement social (CAFDES)",
+      "category": 2
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 2,
+    "fields": {
+      "scope": 3,
+      "description": "Certificat d'aptitude aux fonctions de responsable d'unité d'intervention sociale (CAFERUIS)",
+      "category": 2
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 3,
+    "fields": {
+      "scope": 3,
+      "description": "Diplôme d'État en Ingénierie Sociale (DEIS)",
+      "category": 2
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 4,
+    "fields": {
+      "scope": 3,
+      "description": "Diplôme d'État Supérieur de la Jeunesse, de l’Éducation Populaire et du Sport - spécialité : animation socio-éducative et culturelle (DESJEPS)",
+      "category": 2
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 5,
+    "fields": {
+      "scope": 3,
+      "description": "Diplôme d'État d'assistant de service social (DEASS)",
+      "category": 2
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 6,
+    "fields": {
+      "scope": 3,
+      "description": "Diplôme d'État de conseiller en économie sociale et familiale (DECESF)",
+      "category": 2
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 7,
+    "fields": {
+      "scope": 3,
+      "description": "Diplôme d'État d'éducateur de jeunes enfants (DEEJE)",
+      "category": 2
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 8,
+    "fields": {
+      "scope": 3,
+      "description": "Diplôme d'État d'éducateur spécialisé (DEES)",
+      "category": 2
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 9,
+    "fields": {
+      "scope": 3,
+      "description": "Diplôme d'État d'éducateur technique spécialisé (DEETS)",
+      "category": 2
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 10,
+    "fields": {
+      "scope": 3,
+      "description": "Diplôme d’État de la Jeunesse, de l’Éducation Populaire et du Sport - spécialité : animation socio-éducative et culturelle (DEJEPS)",
+      "category": 2
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 11,
+    "fields": {
+      "scope": 3,
+      "description": "Diplôme d'État de moniteur-éducateur (DEME)",
+      "category": 2
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 12,
+    "fields": {
+      "scope": 3,
+      "description": "Certificat d'aptitude aux fonctions de moniteur-éducateur (CAFME)",
+      "category": 2
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 13,
+    "fields": {
+      "scope": 3,
+      "description": "Diplôme d'État d'aide médico-psychologique (DEAMP)",
+      "category": 2
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 18,
+    "fields": {
+      "scope": 3,
+      "description": "Handicap psychique/mental",
+      "category": 4
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 19,
+    "fields": {
+      "scope": 3,
+      "description": "Handicap mobilité réduite",
+      "category": 4
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 20,
+    "fields": {
+      "scope": 3,
+      "description": "Aide sociale à l’enfance",
+      "category": 4
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 21,
+    "fields": {
+      "scope": 3,
+      "description": "Personnes âgées",
+      "category": 4
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 22,
+    "fields": {
+      "scope": 3,
+      "description": "En établissement de santé",
+      "category": 4
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 23,
+    "fields": {
+      "scope": 3,
+      "description": "Logement",
+      "category": 4
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 24,
+    "fields": {
+      "scope": 3,
+      "description": "Insertion sociale",
+      "category": 4
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 25,
+    "fields": {
+      "scope": 3,
+      "description": "Insertion professionnelle",
+      "category": 4
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 26,
+    "fields": {
+      "scope": 3,
+      "description": "Aptitude à la négociation",
+      "category": 4
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 27,
+    "fields": {
+      "scope": 3,
+      "description": "Accompagnement de salariés en entreprise",
+      "category": 4
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 28,
+    "fields": {
+      "scope": 3,
+      "description": "Conduire des projets sociaux",
+      "category": 4
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 29,
+    "fields": {
+      "scope": 3,
+      "description": "Management",
+      "category": 4
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 30,
+    "fields": {
+      "scope": 3,
+      "description": "Animer et concevoir des ateliers thématiques",
+      "category": 4
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 31,
+    "fields": {
+      "scope": 3,
+      "description": "Animer une formation",
+      "category": 4
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 32,
+    "fields": {
+      "scope": 3,
+      "description": "Méthodes d’enquête",
+      "category": 4
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 33,
+    "fields": {
+      "scope": 3,
+      "description": "Code de procédure pénale",
+      "category": 4
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 34,
+    "fields": {
+      "scope": 3,
+      "description": "Droit du travail",
+      "category": 4
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 35,
+    "fields": {
+      "scope": 3,
+      "description": "Economie sociale",
+      "category": 4
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 36,
+    "fields": {
+      "scope": 3,
+      "description": "Développer un réseau de partenaires",
+      "category": 4
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 41,
+    "fields": {
+      "scope": 3,
+      "description": "Maîtrise basique du Pack office (Excel, Word, Powerpoint)",
+      "category": 6
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 42,
+    "fields": {
+      "scope": 3,
+      "description": "Outils bureautiques Google",
+      "category": 6
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 43,
+    "fields": {
+      "scope": 3,
+      "description": "Savoir envoyer des emails",
+      "category": 6
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 44,
+    "fields": {
+      "scope": 3,
+      "description": "Chercher des informations sur internet",
+      "category": 6
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 45,
+    "fields": {
+      "scope": 3,
+      "description": "Anglais",
+      "category": 7
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 46,
+    "fields": {
+      "scope": 3,
+      "description": "Espagnol",
+      "category": 7
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 47,
+    "fields": {
+      "scope": 3,
+      "description": "Arabe",
+      "category": 7
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 48,
+    "fields": {
+      "scope": 3,
+      "description": "Mandarin",
+      "category": 7
+    }
+  },
+  {
+    "model": "core.feature",
+    "pk": 49,
+    "fields": {
+      "scope": 3,
+      "description": "Russe",
+      "category": 7
+    }
   }
-},
-{
-  "model": "core.featurecategory",
-  "pk": 3,
-  "fields": {
-    "scope": 3,
-    "name": "Années d’expérience",
-    "multiple_choices": false,
-    "rank": 30
-  }
-},
-{
-  "model": "core.featurecategory",
-  "pk": 4,
-  "fields": {
-    "scope": 3,
-    "name": "Expérience(s) spécifique(s)",
-    "multiple_choices": true,
-    "rank": 50
-  }
-},
-{
-  "model": "core.featurecategory",
-  "pk": 5,
-  "fields": {
-    "scope": 3,
-    "name": "Déplacement",
-    "multiple_choices": false,
-    "rank": 40
-  }
-},
-{
-  "model": "core.featurecategory",
-  "pk": 6,
-  "fields": {
-    "scope": 3,
-    "name": "Outils numériques",
-    "multiple_choices": true,
-    "rank": 70
-  }
-},
-{
-  "model": "core.featurecategory",
-  "pk": 7,
-  "fields": {
-    "scope": 3,
-    "name": "Langues",
-    "multiple_choices": true,
-    "rank": 60
-  }
-},
-{
-  "model": "core.featurecategory",
-  "pk": 8,
-  "fields": {
-    "scope": 1,
-    "name": "Type de mission",
-    "multiple_choices": false,
-    "rank": 10
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 1,
-  "fields": {
-    "scope": 3,
-    "description": "Certificat d'aptitude aux fonctions de directeur d'établissement social (CAFDES)",
-    "category": 2
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 2,
-  "fields": {
-    "scope": 3,
-    "description": "Certificat d'aptitude aux fonctions de responsable d'unité d'intervention sociale (CAFERUIS)",
-    "category": 2
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 3,
-  "fields": {
-    "scope": 3,
-    "description": "Diplôme d'État en Ingénierie Sociale (DEIS)",
-    "category": 2
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 4,
-  "fields": {
-    "scope": 3,
-    "description": "Diplôme d'État Supérieur de la Jeunesse, de l’Éducation Populaire et du Sport - spécialité : animation socio-éducative et culturelle (DESJEPS)",
-    "category": 2
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 5,
-  "fields": {
-    "scope": 3,
-    "description": "Diplôme d'État d'assistant de service social (DEASS)",
-    "category": 2
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 6,
-  "fields": {
-    "scope": 3,
-    "description": "Diplôme d'État de conseiller en économie sociale et familiale (DECESF)",
-    "category": 2
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 7,
-  "fields": {
-    "scope": 3,
-    "description": "Diplôme d'État d'éducateur de jeunes enfants (DEEJE)",
-    "category": 2
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 8,
-  "fields": {
-    "scope": 3,
-    "description": "Diplôme d'État d'éducateur spécialisé (DEES)",
-    "category": 2
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 9,
-  "fields": {
-    "scope": 3,
-    "description": "Diplôme d'État d'éducateur technique spécialisé (DEETS)",
-    "category": 2
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 10,
-  "fields": {
-    "scope": 3,
-    "description": "Diplôme d’État de la Jeunesse, de l’Éducation Populaire et du Sport - spécialité : animation socio-éducative et culturelle (DEJEPS)",
-    "category": 2
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 11,
-  "fields": {
-    "scope": 3,
-    "description": "Diplôme d'État de moniteur-éducateur (DEME)",
-    "category": 2
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 12,
-  "fields": {
-    "scope": 3,
-    "description": "Certificat d'aptitude aux fonctions de moniteur-éducateur (CAFME)",
-    "category": 2
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 13,
-  "fields": {
-    "scope": 3,
-    "description": "Diplôme d'État d'aide médico-psychologique (DEAMP)",
-    "category": 2
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 14,
-  "fields": {
-    "scope": 3,
-    "description": "Jeune diplômé",
-    "category": 3
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 15,
-  "fields": {
-    "scope": 3,
-    "description": "0 à 3 ans",
-    "category": 3
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 16,
-  "fields": {
-    "scope": 3,
-    "description": "4 à 8ans",
-    "category": 3
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 17,
-  "fields": {
-    "scope": 3,
-    "description": "+ 8 ans",
-    "category": 3
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 18,
-  "fields": {
-    "scope": 3,
-    "description": "Handicap psychique/mental",
-    "category": 4
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 19,
-  "fields": {
-    "scope": 3,
-    "description": "Handicap mobilité réduite",
-    "category": 4
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 20,
-  "fields": {
-    "scope": 3,
-    "description": "Aide sociale à l’enfance",
-    "category": 4
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 21,
-  "fields": {
-    "scope": 3,
-    "description": "Personnes âgées",
-    "category": 4
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 22,
-  "fields": {
-    "scope": 3,
-    "description": "En établissement de santé",
-    "category": 4
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 23,
-  "fields": {
-    "scope": 3,
-    "description": "Logement",
-    "category": 4
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 24,
-  "fields": {
-    "scope": 3,
-    "description": "Insertion sociale",
-    "category": 4
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 25,
-  "fields": {
-    "scope": 3,
-    "description": "Insertion professionnelle",
-    "category": 4
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 26,
-  "fields": {
-    "scope": 3,
-    "description": "Aptitude à la négociation",
-    "category": 4
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 27,
-  "fields": {
-    "scope": 3,
-    "description": "Accompagnement de salariés en entreprise",
-    "category": 4
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 28,
-  "fields": {
-    "scope": 3,
-    "description": "Conduire des projets sociaux",
-    "category": 4
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 29,
-  "fields": {
-    "scope": 3,
-    "description": "Management",
-    "category": 4
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 30,
-  "fields": {
-    "scope": 3,
-    "description": "Animer et concevoir des ateliers thématiques",
-    "category": 4
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 31,
-  "fields": {
-    "scope": 3,
-    "description": "Animer une formation",
-    "category": 4
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 32,
-  "fields": {
-    "scope": 3,
-    "description": "Méthodes d’enquête",
-    "category": 4
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 33,
-  "fields": {
-    "scope": 3,
-    "description": "Code de procédure pénale",
-    "category": 4
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 34,
-  "fields": {
-    "scope": 3,
-    "description": "Droit du travail",
-    "category": 4
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 35,
-  "fields": {
-    "scope": 3,
-    "description": "Economie sociale",
-    "category": 4
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 36,
-  "fields": {
-    "scope": 3,
-    "description": "Développer un réseau de partenaires",
-    "category": 4
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 37,
-  "fields": {
-    "scope": 1,
-    "description": "Permis B obligatoire",
-    "category": 5
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 38,
-  "fields": {
-    "scope": 1,
-    "description": "Permis B souhaité",
-    "category": 5
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 39,
-  "fields": {
-    "scope": 1,
-    "description": "Avoir son propre véhicule",
-    "category": 5
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 40,
-  "fields": {
-    "scope": 1,
-    "description": "Pas besoin de permis B",
-    "category": 5
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 41,
-  "fields": {
-    "scope": 3,
-    "description": "Maîtrise basique du Pack office (Excel, Word, Powerpoint)",
-    "category": 6
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 42,
-  "fields": {
-    "scope": 3,
-    "description": "Outils bureautiques Google",
-    "category": 6
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 43,
-  "fields": {
-    "scope": 3,
-    "description": "Savoir envoyer des emails",
-    "category": 6
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 44,
-  "fields": {
-    "scope": 3,
-    "description": "Chercher des informations sur internet",
-    "category": 6
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 45,
-  "fields": {
-    "scope": 3,
-    "description": "Anglais",
-    "category": 7
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 46,
-  "fields": {
-    "scope": 3,
-    "description": "Espagnol",
-    "category": 7
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 47,
-  "fields": {
-    "scope": 3,
-    "description": "Arabe",
-    "category": 7
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 48,
-  "fields": {
-    "scope": 3,
-    "description": "Mandarin",
-    "category": 7
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 49,
-  "fields": {
-    "scope": 3,
-    "description": "Russe",
-    "category": 7
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 50,
-  "fields": {
-    "scope": 1,
-    "description": "SOS Renfort (besoin d’aide dans les 48h maximum)",
-    "category": 8
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 51,
-  "fields": {
-    "scope": 1,
-    "description": "Délai standard",
-    "category": 8
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 52,
-  "fields": {
-    "scope": 2,
-    "description": "Permis B",
-    "category": 5
-  }
-},
-{
-  "model": "core.feature",
-  "pk": 53,
-  "fields": {
-    "scope": 2,
-    "description": "Véhicule personnel",
-    "category": 5
-  }
-}
 ]

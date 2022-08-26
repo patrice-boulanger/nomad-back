@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.base_user import BaseUserManager
-
+import string
 from .company import Company
 from .features import Feature
 
@@ -15,7 +15,8 @@ class UserManager(BaseUserManager):
 
     def _create_user(self, email, password, **extra_fields):
         if not email:
-            raise ValueError(_('Email value is mandatory to create a new user'))
+            raise ValueError(
+                _('Email value is mandatory to create a new user'))
 
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
@@ -44,6 +45,9 @@ class UserManager(BaseUserManager):
 
 class User(AbstractUser):
     """ Specific user model which remove the username field and use the email as user's identifier. """
+    def group_based_upload_to(instance, filename):
+
+        return f"files/{instance.last_name}/{filename}"
 
     #: Nomad administrator
     ADMIN = 0
@@ -58,11 +62,27 @@ class User(AbstractUser):
         (ENTREPRENEUR, _('Entrepreneur')),
     )
 
+    #: young graduate
+    FIRST = 0
+    #: 0 to 3 years
+    SECOND = 1
+    #: 4 to 8 years
+    THIRD = 2
+    # more than 8 years
+    FOURTH = 3
+
+    EXPERIENCES = (
+        (FIRST, _('Young graduate')),
+        (SECOND, _('0 to 3 years of experience')),
+        (THIRD, _('4 to 8 years of experience')),
+        (FOURTH, _('more than 8 years of experience')),
+    )
+
     #: We don't use the username, remove this field from the base model.
     username = None
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name', ]
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'phone']
     objects = UserManager()
 
     #: Set the email field as user identifier and set it unique.
@@ -72,16 +92,30 @@ class User(AbstractUser):
     #: Last name of the user, set as mandatory.
     last_name = models.CharField(max_length=150, verbose_name=_('last name'))
     #: Phone number, required for each user company, optional for other types of users
-    phone = models.CharField(max_length=20, blank=True, null=True, verbose_name=_('phone number'),
-                             help_text=_('required for company users'))
+    phone = models.CharField(max_length=20, verbose_name=_('phone number',),
+                             help_text=_('required for company users and entrepreneur'))
     #: Type of the user
-    type = models.PositiveSmallIntegerField(choices=TYPES, default=ENTREPRENEUR, verbose_name=_('type of user'))
+    type = models.PositiveSmallIntegerField(
+        choices=TYPES, default=ENTREPRENEUR, verbose_name=_('type of user'))
+    #: Driving license of the user
+    driving_license = models.BooleanField(
+        default=False, verbose_name=_('driving license'))
     #: Company of the user if needed
     company = models.ForeignKey(Company, on_delete=models.PROTECT, blank=True, null=True,
                                 verbose_name=_('company'), related_name='users')
 
     #: Features for entrepreneur users
-    features = models.ManyToManyField(Feature, related_name='users', blank=True, verbose_name=_('features'))
+    features = models.ManyToManyField(
+        Feature, related_name='users', blank=True, verbose_name=_('features'))
+
+    year_experience = models.PositiveSmallIntegerField(
+        choices=EXPERIENCES, default=FIRST, verbose_name=_('years of experience'))
+
+    siret = models.CharField(max_length=9, verbose_name=_(
+        'SIRET number'), help_text=_('must be 9 characters wide'), blank=True,)
+
+    files = models.FileField(upload_to=group_based_upload_to, blank=True, verbose_name=_(
+        'files required'))
 
     @property
     def is_admin(self):
@@ -108,9 +142,18 @@ class User(AbstractUser):
         super().clean()
         if self.is_company:
             if not self.company:
-                raise ValidationError(_('a company user must be attached to an existing company'))
+                raise ValidationError(
+                    _('a company user must be attached to an existing company'))
             if not self.phone:
-                raise ValidationError(_('company users must have a valid phone number'))
+                raise ValidationError(
+                    _('company users must have a valid phone number'))
+
+        if len(self.siret) != 9:
+            raise ValidationError(
+                _('SIRET number must be 9 characters wide'), )
+        if any([c not in string.digits for c in self.siret]):
+            raise ValidationError(
+                _('SIRET number should contain only digits characters'))
 
     def save(self, *args, **kwargs):
         self.full_clean()

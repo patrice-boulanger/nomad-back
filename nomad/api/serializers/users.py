@@ -8,7 +8,8 @@ class EntrepreneurSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'last_name', 'type',)
+        fields = ('email', 'first_name', 'last_name',
+                  'type', 'driving_license', 'phone', 'year_experience', 'siret')
 
 
 class EntrepreneurCreateSerializer(serializers.ModelSerializer):
@@ -19,5 +20,4 @@ class EntrepreneurCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'last_name', 'password',)
-
+        fields = ('email', 'first_name', 'last_name', 'password', 'phone')

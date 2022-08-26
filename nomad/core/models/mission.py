@@ -13,7 +13,23 @@ from core.utils import zipcode_extract
 
 logger = logging.getLogger("application")
 
+
 class Mission(models.Model):
+    #: young graduate
+    FIRST = 0
+    #: 0 to 3 years
+    SECOND = 1
+    #: 4 to 8 years
+    THIRD = 2
+    # more than 8 years
+    FOURTH = 3
+
+    EXPERIENCES = (
+        (FIRST, _('Young graduate')),
+        (SECOND, _('0 to 3 years of experience')),
+        (THIRD, _('4 to 8 years of experience')),
+        (FOURTH, _('more than 8 years of experience')),
+    )
 
     #: Title of the mission.
     title = models.CharField(max_length=300, verbose_name=_('title'))
@@ -24,16 +40,28 @@ class Mission(models.Model):
     #: End date of the mission
     end = models.DateField(verbose_name=_('end date'))
     #: Company owning the mission
-    company = models.ForeignKey(Company, on_delete=models.PROTECT, verbose_name=_('company'), related_name="missions")
+    company = models.ForeignKey(Company, on_delete=models.PROTECT, verbose_name=_(
+        'company'), related_name="missions")
 
     #: Features of the mission
-    features = models.ManyToManyField(Feature, related_name="missions", blank=True, verbose_name=_('features'))
+    features = models.ManyToManyField(
+        Feature, related_name="missions", blank=True, verbose_name=_('features'))
 
     #: Location of the mission
     zipcode = models.CharField(max_length=5, verbose_name=_('zipcode'))
     #: City of the mission, inferred from the zipcode
     city = models.CharField(default=None, max_length=100, blank=True, null=True, verbose_name=_('city'),
                             editable=False, help_text=_('this field is auto-completed'))
+
+    driving_license_required = models.BooleanField(
+        default=False, verbose_name=_('driving license required'))
+
+    is_matchable = models.BooleanField(
+        default=True, verbose_name=_('is matchable'))
+
+    year_experience_required = models.PositiveSmallIntegerField(
+        choices=EXPERIENCES, default=FIRST, verbose_name=_('years of experience required'))
+
     def __str__(self):
         return "M-" + str(self.pk).rjust(5, '0')
 
@@ -57,7 +85,8 @@ class Mission(models.Model):
         try:
             self.city, d, dn, r, la, lo = zipcode_extract(self.zipcode)
         except Exception as e:
-            logger.warning(f"cannot expand zipcode {self.zipcode} for mission {self.pk}: {str(e)}")
+            logger.warning(
+                f"cannot expand zipcode {self.zipcode} for mission {self.pk}: {str(e)}")
 
     def save(self, *args, **kwargs):
         self.full_clean()

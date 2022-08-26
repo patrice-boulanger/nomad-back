@@ -1,10 +1,11 @@
 from django.contrib import admin
+from django.conf.urls import url
 from django.db import models
 from django.utils import timezone
 from django.utils.html import mark_safe
 from django.contrib.auth.admin import UserAdmin, GroupAdmin
 from django.contrib.auth.models import Group
-
+import matching
 from tinymce.widgets import TinyMCE
 
 from core.models import User, Company, FeatureCategory, Feature, Availability, WorkLocation, Mission
@@ -12,12 +13,14 @@ from core.models import User, Company, FeatureCategory, Feature, Availability, W
 
 @admin.register(Mission)
 class MissionAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'company', 'start', 'end', 'city', 'title', 'state',)
+    list_display = ('__str__', 'company', 'start',
+                    'end', 'city', 'title', 'state', 'is_matchable',)
     fieldsets = (
         (None, {
             'fields': (
                 'title', 'description',
-                'company',
+                'company', 'is_matchable', ('driving_license_required',
+                                            'year_experience_required'),
                 ('start', 'end',),
                 ('zipcode', 'city',),
                 'features',
@@ -31,6 +34,7 @@ class MissionAdmin(admin.ModelAdmin):
 
     filter_horizontal = ('features', )
     readonly_fields = ('state', 'city',)
+    change_list_template = 'admin/mission/mission_change_list.html'
 
 
 class CompanyUserInline(admin.TabularInline):
@@ -76,13 +80,16 @@ class AvailabilityInline(admin.StackedInline):
 class WorkLocationInline(admin.StackedInline):
     model = WorkLocation
     extra = 2
-    fields = ('zipcode', 'city', 'department_name', 'region', ('longitude', 'latitude'), )
-    readonly_fields = ('city', 'department_name', 'region', 'longitude', 'latitude', )
+    fields = ('zipcode', 'city', 'department_name',
+              'region', ('longitude', 'latitude'), )
+    readonly_fields = ('city', 'department_name',
+                       'region', 'longitude', 'latitude', )
 
 
 @admin.register(User)
 class UserAdmin(UserAdmin, admin.ModelAdmin):
-    list_display = ('email', 'first_name', 'last_name', 'type', 'is_complete', 'is_superuser', 'is_staff', 'last_login',)
+    list_display = ('email', 'first_name', 'last_name', 'type',
+                    'is_complete', 'is_superuser', 'is_staff', 'last_login',)
     filter_horizontal = ('features', )
     readonly_fields = ('is_complete',)
 
@@ -106,9 +113,9 @@ class UserAdmin(UserAdmin, admin.ModelAdmin):
         (None, {
             'fields': (('email', 'is_complete'),
                        ('first_name', 'last_name',),
-                       'phone',
-                       'password',
-                       ('type', 'company'),),
+                       'phone', 'siret',
+                       'password', ('driving_license', 'year_experience'),
+                       ('type', 'company'), 'files',),
         }),
         ('Permissions', {
             'classes': ('collapse', ),
@@ -129,7 +136,7 @@ class UserAdmin(UserAdmin, admin.ModelAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'first_name', 'last_name', 'password1', 'password2'),
+            'fields': ('email', 'first_name', 'last_name', 'phone', 'password1', 'password2'),
         }),
     )
 
@@ -143,14 +150,14 @@ class FeatureInline(admin.TabularInline):
 
     fieldsets = (
         (None, {
-            'fields': ( ('from_dt', 'to_dt',), ),
+            'fields': (('from_dt', 'to_dt',), ),
         }),
     )
 
 
 @admin.register(FeatureCategory)
 class FeatureCategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'scope', 'multiple_choices', 'rank',  )
+    list_display = ('name', 'scope', 'multiple_choices', 'rank',)
     fieldsets = (
         (None, {
             'fields': ('name', ('scope', 'rank', 'multiple_choices', ), )
@@ -161,7 +168,5 @@ class FeatureCategoryAdmin(admin.ModelAdmin):
 
 
 admin.site.site_header = 'Nomad-Social Dashboard'
-
 # we don't use Django groups
 admin.site.unregister(Group)
-
