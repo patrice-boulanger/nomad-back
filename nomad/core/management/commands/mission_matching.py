@@ -39,6 +39,8 @@ class Command(BaseCommand):
 
             buffer.write('\r\n')
 
+        print(buffer.getvalue())
+
         if options['email']:
             send_mail(subject='Matching of missions',
                 message=buffer.getvalue(),
