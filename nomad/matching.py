@@ -1,5 +1,4 @@
 
-
 from core.models import User, Mission
 from operator import countOf
 
@@ -13,9 +12,7 @@ import django
 from django.http import HttpResponse
 from django.shortcuts import render
 
-sys.path.append('.')
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "nomad.settings.dev")
-django.setup()
+
 
 date = timezone.now()
 
@@ -91,4 +88,7 @@ def match_all_missions(request):
 
 
 if __name__ == "__main__":
+    sys.path.append('.')
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "nomad.settings.dev")
+    django.setup()
     match_all_missions()
