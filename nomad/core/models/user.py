@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.base_user import BaseUserManager
-
+import string
 from .company import Company
 from .features import Feature
 
@@ -45,6 +45,9 @@ class UserManager(BaseUserManager):
 
 class User(AbstractUser):
     """ Specific user model which remove the username field and use the email as user's identifier. """
+    def group_based_upload_to(instance, filename):
+
+        return f"files/{instance.last_name}/{filename}"
 
     #: Nomad administrator
     ADMIN = 0
@@ -108,6 +111,12 @@ class User(AbstractUser):
     year_experience = models.PositiveSmallIntegerField(
         choices=EXPERIENCES, default=FIRST, verbose_name=_('years of experience'))
 
+    siret = models.CharField(max_length=9, verbose_name=_(
+        'SIRET number'), help_text=_('must be 9 characters wide'), blank=True,)
+
+    files = models.FileField(upload_to=group_based_upload_to, blank=True, verbose_name=_(
+        'files required'))
+
     @property
     def is_admin(self):
         return self.type == User.ADMIN
@@ -138,6 +147,13 @@ class User(AbstractUser):
             if not self.phone:
                 raise ValidationError(
                     _('company users must have a valid phone number'))
+
+        if len(self.siret) != 9:
+            raise ValidationError(
+                _('SIRET number must be 9 characters wide'), )
+        if any([c not in string.digits for c in self.siret]):
+            raise ValidationError(
+                _('SIRET number should contain only digits characters'))
 
     def save(self, *args, **kwargs):
         self.full_clean()

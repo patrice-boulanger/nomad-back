@@ -113,9 +113,9 @@ class UserAdmin(UserAdmin, admin.ModelAdmin):
         (None, {
             'fields': (('email', 'is_complete'),
                        ('first_name', 'last_name',),
-                       'phone',
+                       'phone', 'siret',
                        'password', ('driving_license', 'year_experience'),
-                       ('type', 'company'),),
+                       ('type', 'company'), 'files',),
         }),
         ('Permissions', {
             'classes': ('collapse', ),
