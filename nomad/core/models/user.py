@@ -59,11 +59,27 @@ class User(AbstractUser):
         (ENTREPRENEUR, _('Entrepreneur')),
     )
 
+    #: young graduate
+    FIRST = 0
+    #: 0 to 3 years
+    SECOND = 1
+    #: 4 to 8 years
+    THIRD = 2
+    # more than 8 years
+    FOURTH = 3
+
+    EXPERIENCES = (
+        (FIRST, _('Young graduate')),
+        (SECOND, _('0 to 3 years of experience')),
+        (THIRD, _('4 to 8 years of experience')),
+        (FOURTH, _('more than 8 years of experience')),
+    )
+
     #: We don't use the username, remove this field from the base model.
     username = None
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name', ]
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'phone']
     objects = UserManager()
 
     #: Set the email field as user identifier and set it unique.
@@ -73,8 +89,8 @@ class User(AbstractUser):
     #: Last name of the user, set as mandatory.
     last_name = models.CharField(max_length=150, verbose_name=_('last name'))
     #: Phone number, required for each user company, optional for other types of users
-    phone = models.CharField(max_length=20, blank=True, null=True, verbose_name=_('phone number'),
-                             help_text=_('required for company users'))
+    phone = models.CharField(max_length=20, verbose_name=_('phone number',),
+                             help_text=_('required for company users and entrepreneur'))
     #: Type of the user
     type = models.PositiveSmallIntegerField(
         choices=TYPES, default=ENTREPRENEUR, verbose_name=_('type of user'))
@@ -88,6 +104,9 @@ class User(AbstractUser):
     #: Features for entrepreneur users
     features = models.ManyToManyField(
         Feature, related_name='users', blank=True, verbose_name=_('features'))
+
+    year_experience = models.PositiveSmallIntegerField(
+        choices=EXPERIENCES, default=FIRST, verbose_name=_('years of experience'))
 
     @property
     def is_admin(self):

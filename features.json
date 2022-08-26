@@ -11,16 +11,6 @@
   },
   {
     "model": "core.featurecategory",
-    "pk": 3,
-    "fields": {
-      "scope": 3,
-      "name": "Années d’expérience",
-      "multiple_choices": false,
-      "rank": 30
-    }
-  },
-  {
-    "model": "core.featurecategory",
     "pk": 4,
     "fields": {
       "scope": 3,
@@ -174,42 +164,6 @@
       "scope": 3,
       "description": "Diplôme d'État d'aide médico-psychologique (DEAMP)",
       "category": 2
-    }
-  },
-  {
-    "model": "core.feature",
-    "pk": 14,
-    "fields": {
-      "scope": 3,
-      "description": "Jeune diplômé",
-      "category": 3
-    }
-  },
-  {
-    "model": "core.feature",
-    "pk": 15,
-    "fields": {
-      "scope": 3,
-      "description": "0 à 3 ans",
-      "category": 3
-    }
-  },
-  {
-    "model": "core.feature",
-    "pk": 16,
-    "fields": {
-      "scope": 3,
-      "description": "4 à 8ans",
-      "category": 3
-    }
-  },
-  {
-    "model": "core.feature",
-    "pk": 17,
-    "fields": {
-      "scope": 3,
-      "description": "+ 8 ans",
-      "category": 3
     }
   },
   {

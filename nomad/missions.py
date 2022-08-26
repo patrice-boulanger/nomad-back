@@ -25,7 +25,7 @@ D = ["Vous mettez en oeuvre le plan d'actions de prévention sanitaire et social
 
 all_zipcodes = list(settings.ZIPCODE_JSON.keys())
 
-for i in range(200):
+for i in range(5):
     start = timezone.now().date() + timedelta(days=random.randint(0, 3))
     end = start + timedelta(days=random.randint(1, 6))
     zipcode = random.choice(all_zipcodes)

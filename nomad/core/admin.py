@@ -19,7 +19,8 @@ class MissionAdmin(admin.ModelAdmin):
         (None, {
             'fields': (
                 'title', 'description',
-                'company', 'is_matchable', 'driving_license_required',
+                'company', 'is_matchable', ('driving_license_required',
+                                            'year_experience_required'),
                 ('start', 'end',),
                 ('zipcode', 'city',),
                 'features',
@@ -113,7 +114,7 @@ class UserAdmin(UserAdmin, admin.ModelAdmin):
             'fields': (('email', 'is_complete'),
                        ('first_name', 'last_name',),
                        'phone',
-                       'password', 'driving_license',
+                       'password', ('driving_license', 'year_experience'),
                        ('type', 'company'),),
         }),
         ('Permissions', {
@@ -135,7 +136,7 @@ class UserAdmin(UserAdmin, admin.ModelAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'first_name', 'last_name', 'password1', 'password2'),
+            'fields': ('email', 'first_name', 'last_name', 'phone', 'password1', 'password2'),
         }),
     )
 

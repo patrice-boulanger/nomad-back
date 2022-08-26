@@ -15,6 +15,21 @@ logger = logging.getLogger("application")
 
 
 class Mission(models.Model):
+    #: young graduate
+    FIRST = 0
+    #: 0 to 3 years
+    SECOND = 1
+    #: 4 to 8 years
+    THIRD = 2
+    # more than 8 years
+    FOURTH = 3
+
+    EXPERIENCES = (
+        (FIRST, _('Young graduate')),
+        (SECOND, _('0 to 3 years of experience')),
+        (THIRD, _('4 to 8 years of experience')),
+        (FOURTH, _('more than 8 years of experience')),
+    )
 
     #: Title of the mission.
     title = models.CharField(max_length=300, verbose_name=_('title'))
@@ -43,6 +58,9 @@ class Mission(models.Model):
 
     is_matchable = models.BooleanField(
         default=True, verbose_name=_('is matchable'))
+
+    year_experience_required = models.PositiveSmallIntegerField(
+        choices=EXPERIENCES, default=FIRST, verbose_name=_('years of experience required'))
 
     def __str__(self):
         return "M-" + str(self.pk).rjust(5, '0')

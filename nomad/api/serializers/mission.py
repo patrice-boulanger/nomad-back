@@ -9,7 +9,7 @@ class MissionListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mission
         fields = ('id', 'title', 'start', 'end', 'zipcode',
-                  'city', 'company', 'driving_license_required')
+                  'city', 'company', 'driving_license_required', 'year_experience_required')
 
 
 class MissionDetailSerializer(serializers.ModelSerializer):
