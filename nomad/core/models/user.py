@@ -142,18 +142,17 @@ class User(AbstractUser):
         super().clean()
         if self.is_company:
             if not self.company:
-                raise ValidationError(
-                    _('a company user must be attached to an existing company'))
+                raise ValidationError(_('a company user must be attached to an existing company'))
             if not self.phone:
-                raise ValidationError(
-                    _('company users must have a valid phone number'))
+                raise ValidationError(_('company users must have a valid phone number'))
 
-        if len(self.siret) != 9:
-            raise ValidationError(
-                _('SIRET number must be 9 characters wide'), )
-        if any([c not in string.digits for c in self.siret]):
-            raise ValidationError(
-                _('SIRET number should contain only digits characters'))
+        if self.is_entrepreneur:
+            if not self.siret:
+                raise ValidationError(_('SIRET number is required for this type of user'))
+            if len(self.siret) != 9:
+                raise ValidationError(_('SIRET number must be 9 characters wide'))
+            if any([c not in string.digits for c in self.siret]):
+                raise ValidationError(_('SIRET number should contain only digits characters'))
 
     def save(self, *args, **kwargs):
         self.full_clean()
