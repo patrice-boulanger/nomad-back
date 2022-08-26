@@ -8,6 +8,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
+BASE_URL="http://localhost:8000"
+
 # Add CORS headers only for dev environment!
 MIDDLEWARE.insert(0, 'corsheaders.middleware.CorsMiddleware')
 
