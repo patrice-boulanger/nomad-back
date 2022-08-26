@@ -5,7 +5,6 @@ from django.utils import timezone
 from django.utils.html import mark_safe
 from django.contrib.auth.admin import UserAdmin, GroupAdmin
 from django.contrib.auth.models import Group
-import matching
 from tinymce.widgets import TinyMCE
 
 from core.models import User, Company, FeatureCategory, Feature, Availability, WorkLocation, Mission
@@ -147,12 +146,12 @@ class UserAdmin(UserAdmin, admin.ModelAdmin):
 class FeatureInline(admin.TabularInline):
     model = Feature
     extra = 3
-
-    fieldsets = (
-        (None, {
-            'fields': (('from_dt', 'to_dt',), ),
-        }),
-    )
+    fields = ('description', 'scope',)
+    # fieldsets = (
+    #     (None, {
+    #         'fields': (('from_dt', 'to_dt',), ),
+    #     }),
+    # )
 
 
 @admin.register(FeatureCategory)

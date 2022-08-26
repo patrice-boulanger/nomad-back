@@ -16,13 +16,17 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-import matching
 from django.conf import settings
 from django.conf.urls.static import static
+
+import matching
+from core.views import mission_matching_view
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('matching/', matching.match_all_missions, name="matching"),
+    path('missions/match/', mission_matching_view, name="mission_matching"),
     path('api/', include(('api.urls', 'api'), namespace='api')),
     path('tinymce/', include('tinymce.urls')),
 ]

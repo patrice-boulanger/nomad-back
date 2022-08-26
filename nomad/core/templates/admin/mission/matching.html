@@ -1,21 +1,16 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'mission/matching.css' %}">
 <h1>Matching missions</h1>
-   
-
-
 
 <div class="matching">
     {% for key, values in resultat %}
-  
-
     <div class="container">
         <div class="ligne">
             <p><strong>Titre de la mission : </strong><a href="/../admin/core/mission/">{{ key }}</a></p>
-            <p><strong>Independant qui ont matchés : </strong><p>
+            <p><strong>Indépendants qui ont matché: </strong><p>
                 {% for value in values %}
-                    <p>Email : <a href="/../admin/core/user/{{value.id}}"><strong>{{ value.email }}</strong> </p></a>
-                    <p>Pourcentage : <strong>{{ value.Pourcentage }}</strong> </p>
+                    <p>Email : <a href="/../admin/core/user/{{value.id}}"><strong>{{ value.email }}</strong></a></p>
+                    <p>Pourcentage : <strong>{{ value.Pourcentage }}</strong></p>
                     <hr>
                 {% endfor %}
         </div>

@@ -1,9 +1,12 @@
 {% extends 'admin/change_list.html' %}
 
 {% block object-tools %}
-<div>
-    <h1>Matching missions</h1>
-    <a href="{% url 'matching' %}" target="_blank">Matching </a>
-</div>
-{{ block.super }}
+    <div>
+        <h1>Matching missions</h1>
+        <ul>
+            <li><a href="{% url 'matching' %}" target="_blank">Selim's matching </a></li>
+            <li><a href="{% url 'mission_matching' %}" target="_blank">Patoche's matching </a></li>
+        </ul>
+    </div>
+    {{ block.super }}
 {% endblock object-tools %}

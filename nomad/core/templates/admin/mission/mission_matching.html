@@ -1,0 +1,23 @@
+{% extends "admin/base_site.html" %}
+
+{% block title %}Mission matching{% endblock %}
+
+{% block content %}
+{% if matches|length == 0 %}
+    <h3>No matching available</h3>
+{% else %}
+    {% for mission, data in matches.items %}
+        Mission <a href="{% url 'admin:core_mission_change' mission %}">{{ mission }}</a>:
+        <ul>
+        {% for user, percent in data %}
+            <li>
+                <a href="{% url 'admin:core_user_change' user.pk %}">{{ user.email }}</a> matches
+                <span style="font-weight: bold; color:
+                {% if percent >= 90 %}green{% elif percent >= 50 %}orange{% else %}red{% endif %}">{{ percent }}%</span>
+                of the required features
+            </li>
+        {% endfor %}
+        </ul>
+    {% endfor %}
+{% endif %}
+{% endblock %}
