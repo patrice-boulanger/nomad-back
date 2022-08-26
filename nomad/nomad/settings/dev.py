@@ -32,3 +32,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'nepasrepondre.djeghdir@gmail.com'
 EMAIL_HOST_PASSWORD = 'ujthvzjvxzvzwrgu'
 EMAIL_PORT = 587
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
