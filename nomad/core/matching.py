@@ -25,34 +25,42 @@ def match_missions_vs_users(debug=False):
         for user in users:
             # check driving license
             if mission.driving_license_required and not user.driving_license:
-                if debug: sys.stderr.write(f"{user}: driving license doesn't match\n")
+                if debug:
+                    sys.stderr.write(
+                        f"{user}: driving license doesn't match\n")
                 continue
 
             # check user's locations
             if mission.zipcode not in user.locations.all().values_list('zipcode', flat=True):
-                if debug: sys.stderr.write(f"{user}: zipcode doesn't match\n")
+                if debug:
+                    sys.stderr.write(f"{user}: zipcode doesn't match\n")
                 continue
 
             # check user's availabilities
-            availabilities = user.availabilities.filter(start__date__lte=mission.start, end__date__gte=mission.end)
+            availabilities = user.availabilities.filter(
+                start__date__lte=mission.start, end__date__gte=mission.end)
             if not availabilities:
-                if debug: sys.stderr.write(f"{user}: availability doesn't match\n")
+                if debug:
+                    sys.stderr.write(f"{user}: availability doesn't match\n")
                 continue
 
             # check experience
             if user.year_experience < mission.year_experience_required:
-                if debug: sys.stderr.write(f"{user}: experience doesn't match\n")
+                if debug:
+                    sys.stderr.write(f"{user}: experience doesn't match\n")
                 continue
 
             # check user's features, the user is excluded only if he has no features matching the mission
             mission_features = set(mission.features.all())
-            common_features = set(user.features.all()).intersection(mission_features)
+            common_features = set(
+                user.features.all()).intersection(mission_features)
             if common_features == set():
-                if debug: sys.stderr.write(f"{user}: no common features\n")
+                if debug:
+                    sys.stderr.write(f"{user}: no common features\n")
                 continue
 
             # compute the percentage of matching (even it doesn't mean nothing :-)
-            percent = 100.0 * len(common_features) / len(mission_features)
+            percent = int(100.0 * len(common_features) / len(mission_features))
 
             # user has matched, add it
             try:
