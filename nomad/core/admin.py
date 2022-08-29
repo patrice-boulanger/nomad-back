@@ -7,7 +7,7 @@ from django.contrib.auth.admin import UserAdmin, GroupAdmin
 from django.contrib.auth.models import Group
 from tinymce.widgets import TinyMCE
 
-from core.models import User, Company, FeatureCategory, Feature, Availability, WorkLocation, Mission
+from core.models import User, Company, FeatureCategory, Feature, Availability, WorkLocation, Mission, Files
 
 
 @admin.register(Mission)
@@ -85,6 +85,11 @@ class WorkLocationInline(admin.StackedInline):
                        'region', 'longitude', 'latitude', )
 
 
+class FilesInline(admin.StackedInline):
+    model = Files
+    extra = 2
+
+
 @admin.register(User)
 class UserAdmin(UserAdmin, admin.ModelAdmin):
     list_display = ('email', 'first_name', 'last_name', 'type',
@@ -114,7 +119,7 @@ class UserAdmin(UserAdmin, admin.ModelAdmin):
                        ('first_name', 'last_name',),
                        'phone', 'siret',
                        'password', ('driving_license', 'year_experience'),
-                       ('type', 'company'), 'files',),
+                       ('type', 'company'),),
         }),
         ('Permissions', {
             'classes': ('collapse', ),
@@ -130,6 +135,10 @@ class UserAdmin(UserAdmin, admin.ModelAdmin):
             'classes': ('wide',),
             'fields': ('features', )
         }),
+        ('Description', {
+            'classes': ('wide',),
+            'fields': ('description', )
+        }),
     )
 
     add_fieldsets = (
@@ -140,7 +149,7 @@ class UserAdmin(UserAdmin, admin.ModelAdmin):
     )
 
     ordering = ('email',)
-    inlines = [AvailabilityInline, WorkLocationInline, ]
+    inlines = [AvailabilityInline, WorkLocationInline, FilesInline]
 
 
 class FeatureInline(admin.TabularInline):

@@ -114,8 +114,8 @@ class User(AbstractUser):
     siret = models.CharField(max_length=9, verbose_name=_(
         'SIRET number'), help_text=_('must be 9 characters wide'), blank=True,)
 
-    files = models.FileField(upload_to=group_based_upload_to, blank=True, verbose_name=_(
-        'files required'))
+    description = models.TextField(
+        default="Pas de description", verbose_name=_('description'))
 
     @property
     def is_admin(self):
@@ -142,15 +142,19 @@ class User(AbstractUser):
         super().clean()
         if self.is_company:
             if not self.company:
-                raise ValidationError(_('a company user must be attached to an existing company'))
+                raise ValidationError(
+                    _('a company user must be attached to an existing company'))
             if not self.phone:
-                raise ValidationError(_('company users must have a valid phone number'))
+                raise ValidationError(
+                    _('company users must have a valid phone number'))
 
         if self.siret:
             if len(self.siret) != 9:
-                raise ValidationError(_('SIRET number must be 9 characters wide'))
+                raise ValidationError(
+                    _('SIRET number must be 9 characters wide'))
             if any([c not in string.digits for c in self.siret]):
-                raise ValidationError(_('SIRET number should contain only digits characters'))
+                raise ValidationError(
+                    _('SIRET number should contain only digits characters'))
 
     def save(self, *args, **kwargs):
         self.full_clean()
