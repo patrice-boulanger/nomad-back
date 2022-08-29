@@ -146,9 +146,7 @@ class User(AbstractUser):
             if not self.phone:
                 raise ValidationError(_('company users must have a valid phone number'))
 
-        if self.is_entrepreneur:
-            if not self.siret:
-                raise ValidationError(_('SIRET number is required for this type of user'))
+        if self.siret:
             if len(self.siret) != 9:
                 raise ValidationError(_('SIRET number must be 9 characters wide'))
             if any([c not in string.digits for c in self.siret]):

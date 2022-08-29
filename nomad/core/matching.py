@@ -4,6 +4,7 @@ from django.utils import timezone
 
 from core.models import Mission, User
 
+
 def match_missions_vs_users(debug=False):
     """ Compare all missions versus all entrepreneur users to find those who have the better matching.
 
