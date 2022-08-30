@@ -150,6 +150,7 @@ class UserAdmin(UserAdmin, admin.ModelAdmin):
 
     ordering = ('email',)
     inlines = [AvailabilityInline, WorkLocationInline, FilesInline]
+    change_form_template = "admin/user/user_change.html"
 
 
 class FeatureInline(admin.TabularInline):
