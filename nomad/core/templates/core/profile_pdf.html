@@ -1,0 +1,57 @@
+{% load static %}
+
+<html>
+    <head>
+        <title>User's profile</title>
+        <link rel="stylesheet" href="{% static 'core/user_profile.css' %}">
+        <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+        <div class="container">
+            <div class="left">
+                <div class="title">
+                    <h1>{{first_name}}</h1>
+                    <h3>Travailleur social indépendant</h3>
+                </div>
+                <div class="carac">
+                    <h2>EXPERIENCES</h2>
+                    <hr>
+                    <p>{{year_experience}}</p>
+                    <h2>COMPETENCES</h2>
+                    <hr>
+                    <ul>
+                        {%for competence in competences%}
+                        <li>{{competence}}</li>
+                        {% endfor %}
+                    </ul>
+                    <h2>DIVERS</h2>
+                    <hr>
+                    <ul>
+                        {% if driving_license%}<li>Permis B</li>{% endif %}
+                        <li>Langue(s): {% for langue in langues%}{{langue}}, {% endfor %}</li>
+                        <li>Département(s): {% for worklocation in worklocations%}{{worklocation}}, {% endfor %}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="right">
+                {% comment %} <img class="pp" src="/media/{{pp}}" alt="profile's picture"> {% endcomment %}
+                <div class="picture">
+                    <img class="pp" src="{% static "core/pp.jpg" %}" alt="profile's picture">
+                </div>
+                <div class="supp">
+                    <h2>FORMATION</h2>
+                        {%for graduate in graduates%}
+                            <p>{{graduate}}</p>
+                        {% endfor %}
+                    <h2>DESCRIPTION</h2>
+                    <p>{{description}}</p>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <img class="logo" src="{% static "core/Nomad_Social_Logo.png" %}" alt="nomadsocial'logo">
+            <p>Tous droits réservés - Ce document est confidentiel</p>
+        </div>
+    </body>
+</html>
