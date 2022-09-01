@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django_renderpdf.views import PDFView
 from django.conf import settings
 import os.path
+import base64
 
 
 def mission_matching_view(request):
@@ -67,6 +68,9 @@ class ProfileInPdf(LoginRequiredMixin, PDFView):
         context['description'] = user.description
         for file in user.files.all():
             if os.path.splitext(str(file.files))[1] in ext:
-                context['pp'] = file.files
+                with file.files.open(mode='rb') as img_file:
+                    b64_string = base64.b64encode(img_file.read())
+                    context['pp'] = b64_string.decode('utf-8')
+                file.files.close()
 
         return context

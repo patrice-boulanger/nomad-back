@@ -33,10 +33,9 @@
                     </ul>
                 </div>
             </div>
-            <div class="right">
-                {% comment %} <img class="pp" src="/media/{{pp}}" alt="profile's picture"> {% endcomment %}
+            <div class="right">               
                 <div class="picture">
-                    <img class="pp" src="{% static "core/pp.jpg" %}" alt="profile's picture">
+                    <img class="pp" src="data:image/jpeg;base64, {{pp}}" alt="profile's picture" />
                 </div>
                 <div class="supp">
                     <h2>FORMATION</h2>
