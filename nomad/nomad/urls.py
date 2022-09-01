@@ -19,13 +19,13 @@ from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from core.views import mission_matching_view, profile_pdf
+from core.views import mission_matching_view, ProfileInPdf
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('missions/match/', mission_matching_view, name="mission_matching"),
-    path('user/profil/pdf/<int:id>', profile_pdf, name="profile_pdf"),
+    path('user/profil/pdf/<int:id>', ProfileInPdf.as_view(), name="profile_pdf"),
     path('api/', include(('api.urls', 'api'), namespace='api')),
     path('tinymce/', include('tinymce.urls')),
 ]
